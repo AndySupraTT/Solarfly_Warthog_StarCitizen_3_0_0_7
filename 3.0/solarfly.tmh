@@ -1,0 +1,172 @@
+// Copyright (c) 2015-2017 Derek Douville ("solarfly")
+//
+// Version 3.0_6
+// Jan 1, 2018 11:50AM PST
+//
+// Distributed freely under the MIT License.
+
+include "pilot_settings.tmh"
+include "solarfly_mapping.tmh"
+
+// Magic
+
+int power_ctl[4] = {PULSE+'0', '2', '3', '1'};
+int qdrive_activated = 0;
+
+
+int sc_set_throttle_norm()
+{
+    // printf("Throttle mode: v_throttle_abs\x0a");
+    DXSetAxis(DX_Z_AXIS, AxisVal(Throttle[DX_THROTTLE_AXIS], &axdata));
+    MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+//    DXSetAxis(DX_ZROT_AXIS, 0);
+   	SetSCurve(&Throttle, THR_RIGHT, 0, 0, 0, 0, 0);
+    SetJCurve(&Throttle, THR_RIGHT, 70, 50);  // Nice and smooth
+}
+
+int sc_set_throttle_strafe() 
+{
+    // printf("Throttle mode: v_decoupled_strafe_longitudinal\x0a");
+    DXSetAxis(DX_THROTTLE_AXIS, AxisVal(Throttle[THR_RIGHT], &axdata));
+    MapAxis(&Throttle, THR_RIGHT, DX_THROTTLE_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
+//    DXSetAxis(DX_ZROT_AXIS, 50);
+    SetSCurve(&Throttle, THR_RIGHT, 0, THR_STRAFE_DEADZONE, 0, THR_STRAFE_CURVE, 0);  // Normal
+}
+
+int sc_set_decoupling()
+{
+    ActKey(KEYON+PULSE+v_ifcs_toggle_vector_decoupling);
+}
+
+int abon = 0;
+
+int sc_init_burn_toggle()
+{
+    abon = 0;
+    sc_boost_burnR();
+    if (Throttle[EFLNORM])
+        printf("EFLNORM: Afterburner SPDB Toggle Mode Set\x0a");
+    else
+        printf("EFLOVER: Afterburner SPDB Switch Mode Set\x0a");
+}
+
+// Boost if throttle < 99%. At 100% we hit the afterburner.
+// If EFLNORM is set (normal), this turns on "AB toggle mode", where
+// the SPFB will turn it on on the first click, off on subsequent click.
+// If EFLOVER, it will act as a spring-loaded on/off as expected.
+int sc_boost_burn()
+{
+    // If THR_RIGHT is 99% or greater and Boost, we hit the burners
+    if (AxisVal(Throttle[THR_RIGHT], &axdata) > 32439) {           
+        if (Throttle[EFLNORM]) {
+            if (!abon) {
+                abon = 1;
+            } else {
+                abon = 0;
+                return 0;
+            }
+        }
+        ActKey(KEYON+DOWN+v_afterburner);
+    } else {
+        abon = 0;
+        ActKey(KEYON+DOWN+v_boost);
+    }
+}
+
+int sc_boost_burnR() {
+    ActKey(KEYON+UP+v_boost);
+    if (Throttle[EFLNORM] & abon) {
+        return 0;
+    }
+    ActKey(KEYON+UP+v_afterburner);
+}
+
+// CIG BUG 3.0-PTU Boost is ALWAYS applied with brakes, so this code is moot if/until fixed. No harm in leaving it for now.
+// https://ptu.cloudimperiumgames.com/community/issue-council/star-citizen-30/SC-49601-Spacebrake_always_applies_Boost__even_after_key_remapping__All_Ships_
+int sc_brake_burn()
+{
+    // If Brakes are applied, mode is Coupled and Throttle is less than 50%,
+    // Brake normally. Otherwise add boost to braking.
+    // If Decoupled, do not apply boost around center (50% deadzone).
+    ActKey(KEYON+DOWN+v_brake);
+    int pos = AxisVal(Throttle[THR_RIGHT], &axdata);
+    printf("Brake position: %d\x0a", pos);
+    if (Throttle[BSM] & pos > 0) {  // 50%
+        printf("Applying Brake Boost at %d\x0a", pos);
+        ActKey(KEYON+DOWN+v_boost);
+    } else {
+        if (!Throttle[BSM] & pos < -16384 | pos > 16383) { // 50% boost deadzone
+            printf("Applying normal boost at %d\x0a", pos);
+            ActKey(KEYON+DOWN+v_boost);
+        }
+    }
+}
+
+int sc_brake_burnR() {
+    ActKey(KEYON+UP+v_brake);
+    ActKey(KEYON+UP+v_boost);
+}
+
+int sc_set_joystick_curves()
+{
+    // FLAP position sets joystick curve profile defined in pilot_settings.tmh
+    int profile;
+    if (Throttle[FLAPU]) profile = 0;
+    if (!Throttle[FLAPU] & !Throttle[FLAPD]) profile = 1;
+    if (Throttle[FLAPD]) profile = 2;
+    SetSCurve(&Joystick, JOYX, 0, 0, 0, JS_CURVE[profile], JS_ZOOM[profile]);
+    SetSCurve(&Joystick, JOYY, 0, 0, 0, JS_CURVE[profile], JS_ZOOM[profile]);
+    printf("Profile[%d]: Curve=%d, Zoom=%d\x0a", profile, JS_CURVE[profile], JS_ZOOM[profile]);
+    //led2bin(profile);
+}
+
+int sc_set_tg1_h4p()
+{
+    // If RDRALT
+    int secondary_fire = 0;
+    if (Throttle[RDRNRM]) {  // Normal
+        MapKey(&Joystick, TG1, DX1);  // fire group 1
+        MapKey(&Joystick, TG2, DX5);
+        secondary_fire = DX5;        	    
+	    printf("RDRNRM: Weapon Group 1 on TG1, Weapon Group 2 on H4P\x0a");
+	} else {
+        MapKey(&Joystick, TG1, DX5);  // fire group 1
+        MapKey(&Joystick, TG2, DX1);
+	    secondary_fire = DX1;
+	    printf("RDRDIS: Weapon Group 2 on TG1, Weapon Group 1 on H4P\x0a");
+    }
+    MapKeyIO(&Joystick, H4P, PULSE+pc_select, secondary_fire);   // EACARM: Inner Thought select, EACNORM: Secondary fire
+}
+
+// Switch that governs behavior of Autopilot Engage button
+define AP_SHORT 1
+define AP_LONG 2
+define AP_RELEASE 3
+
+int sc_set_ap_mode_engage(int t) {
+    // t == AP_SHORT, AP_LONG or AP_RELEASE (for MapKeyR)
+    //
+    // In PATH, we select the scan mode. Long press generates active ping.
+    // In ALT/HDG Long-press matches velocity.
+    // In ALT, we toggle the landing gear. Long-press auto-lands.
+    
+    if (t == AP_RELEASE) {
+        ActKey(KEYON+UP+scan_active_ping);
+        ActKey(KEYON+UP+v_autoland);
+        return 0;
+    }
+    if (Throttle[APPAT]) {
+        if (t == AP_SHORT)
+            ActKey(KEYON+PULSE+scan_toggle_mode);
+        if (t == AP_LONG)
+            ActKey(KEYON+DOWN+scan_active_ping);  // Released above
+    } else if (Throttle[APAH]) {
+        if (t == AP_LONG)
+            ActKey(KEYON+PULSE+v_match_target_velocity);
+    } else { // (Throttle[APALT])
+        if (t == AP_SHORT)
+            ActKey(KEYON+PULSE+v_toggle_landing_system);
+        if (t == AP_LONG)
+            ActKey(KEYON+DOWN+v_autoland);  // Auto or Manual
+    }
+}

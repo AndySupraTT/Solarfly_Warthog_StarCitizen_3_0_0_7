@@ -1,0 +1,54 @@
+Solarfly's Thrustmaster WARTHOG Profile for STAR CITIZEN
+
+==================================================================
+==================================================================
+==================================================================
+=== DEVELOPMENT RELEASE FOR 3.0 PTU - THIS IS UNFINISHED
+=== USE AT YOUR OWN RISK - 3_0_2 2017-12-03
+=== THIS CODE IS IN ACTIVE DEVELOPMENT AND WILL CHANGE FREQUENTLY
+==================================================================
+==================================================================
+==================================================================
+THIS IS UNTESTED
+
+Everything could be broken and everything is definitely subject to change
+in the next day (Monday). If you haven't run my profile before, don't
+use this.
+
+
+QUICK START
+-------------------
+1. Delete old files in your StarCitizen\User\Control\Mappings folder.  Unzip the solarfly.zip file and copy everything into your StarCitizen\User\Control\Mappings folder.
+
+2. Make sure you have the latest version of T.A.R.G.E.T from Thrustmaster: https://ts.thrustmaster.com. Do NOT bother anyone for help if you haven't done so!
+
+3. Load StarCitizen_Solarfly_v3xx.tmc into TARGET Script. Edit and save pilot_settings.tmh. RUN.
+
+4. Run your USB/Game Controllers utility and see what order your devices are in
+
+5. Start Star Citizen.
+
+4. In both Arena Commander and Universe, you will have to 
+   a.  pp_rebindkeys
+   b.  pp_rebindkeys layout_solarfly_tm1
+   c.  Optionally, load your rudder overlay file (see Detailed Installation below)
+
+
+
+ABOUT ME
+--------
+I'm a professional tools developer for a startup in the Bay Area. I have been writing
+and updating this Warthog HOTAS profile since StarCitizen Arena Commander 0.8 was
+released. Now we're up to StarCitizen 2.0 Alpha and things keep getting better, but more
+complicated too!
+
+Thanks to the Warthog community that took the time to give their tremendously helpful
+feedback on the Star Citizen forums and contribute to help shape this first pass at a 
+more complete and useful Thrustmaster Warthog interface.
+
+You can give feedback to help improve this profile at 
+https://robertsspaceindustries.com/spectrum/community/SC/forum/50174/thread/solarfly-thrustmaster-warthog-hotas-profile
+
+Happy flying!
+Derek "Solarfly" Douville
+California, USA

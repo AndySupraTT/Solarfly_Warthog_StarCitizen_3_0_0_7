@@ -1,0 +1,32 @@
+<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="layout_solarfly_rud3">
+  <CustomisationUIHeader label="Solarfly Warthog 2.4.0" description="" image="">
+    <devices>
+      <joystick instance="3"/>
+    </devices>
+    <categories>
+      <category label="@ui_CCSpaceFlight"/>
+      <category label=""/>
+    </categories>
+  </CustomisationUIHeader>
+<actionmap name="spaceship_movement">
+    <!-- Rudder Pedals/Lateral Strafe -->
+    <action name="v_roll">
+      <rebind input="js3_rotz"/>
+    </action>
+    <action name="v_decoupled_roll">
+      <rebind input="js3_rotz"/>
+    </action>
+    <action name="v_strafe_left">
+      <rebind input="js3_x"/>
+    </action>
+    <action name="v_decoupled_strafe_left">
+      <rebind input="js3_x"/>
+    </action>
+    <action name="v_strafe_right">
+      <rebind input="js3_y"/>
+    </action>
+    <action name="v_decoupled_strafe_right">
+      <rebind input="js3_y"/>
+    </action>
+</actionmap>
+</ActionMaps>

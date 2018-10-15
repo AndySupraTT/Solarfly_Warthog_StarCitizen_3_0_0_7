@@ -1,0 +1,74 @@
+// Copyright (c) 2015-2018 Derek Douville ("solarfly")
+//
+// Version 3.0_6
+// Jan 1, 2018 11:50AM PST
+
+//
+// Distributed freely under the MIT License.
+
+int init_mfd_left() {
+    // HUD Management
+//    MapKey(&LMFD, GAINU, EXEC("sc_force_toggle_headmode();"));
+  //  MapKey(&LMFD, GAIND, EXEC("sc_force_toggle_hudent();"));
+    MapKey(&LMFD, OSB01, 0);
+    MapKey(&LMFD, OSB02, 0);
+    MapKey(&LMFD, OSB03, 0);
+    MapKey(&LMFD, OSB04, 0);
+    
+    // Look Modes and Self Destruct
+    MapKey(&LMFD, SYMU, TEMPO(PULSE+mobiglass_scoreboard, PULSE+toggle_contact, 300));
+    // 2.4 removed: 
+    //MapKey(&LMFD, SYMD, PULSE+toggle_ar_mode);
+    MapKey(&LMFD, OSB06, PULSE+toggle_chat);
+    MapKey(&LMFD, OSB07, 0);  // Reserved for Starmap in the future
+    MapKey(&LMFD, OSB08, TEMPO(0, v_self_destruct, EJECT_DELAY));  // Hold to self destruct
+    MapKey(&LMFD, OSB09, PULSE+v_toggle_weapon_gimbal_lock); // Gimbals
+    MapKey(&LMFD, OSB10, PULSE+v_couple_aim_to_move); // Look-ahead mode
+    // Navigation Modes
+    MapKey(&LMFD, CONU, 0);  // Reserved for HUD Contrast in the future
+    MapKey(&LMFD, COND, 0);  // Reserved future
+    MapKey(&LMFD, OSB11, PULSE+v_lights);
+    // MapKey(&LMFD, OSB12, PULSE+v_ifcs_mode_shift);  // Obsolete in 2.6
+    MapKey(&LMFD, OSB13, TEMPO(PULSE+v_toggle_qdrive_system, PULSE+v_toggle_qdrive_engagement, 300));
+    MapKey(&LMFD, OSB14, PULSE+v_autoland); // S: request, L: Auto/manual
+    MapKey(&LMFD, OSB15, PULSE+v_toggle_landing_system);
+    // Power
+    MapKey(&LMFD, BRTU, v_power_throttle_up);
+    MapKey(&LMFD, BRTD, v_power_throttle_down);
+    MapKey(&LMFD, OSB16, TEMPO(0, PULSE+v_power_toggle_group_3, 300));  // Engine Power
+    MapKey(&LMFD, OSB17, TEMPO(0, PULSE+v_power_toggle_group_2, 300));  // Shield Power
+    MapKey(&LMFD, OSB18, TEMPO(0, PULSE+v_power_toggle_group_1, 300));  // Weapon Power
+    MapKey(&LMFD, OSB19, PULSE+v_ifcs_toggle_safeties);
+    MapKey(&LMFD, OSB20, PULSE+v_ifcs_toggle_esp);
+}
+
+
+int init_mfd_right() {
+    MapKey(&RMFD, GAINU, PULSE+v_radar_cycle_zoom_fwd);
+    MapKey(&RMFD, GAIND, 0);
+
+    MapKey(&RMFD, OSB01, 0);
+    MapKey(&RMFD, OSB02, 0);
+    MapKey(&RMFD, OSB03, 0);
+    MapKey(&RMFD, OSB04, 0);
+    MapKey(&RMFD, OSB05, 0);
+    MapKey(&RMFD, OSB06, 0);
+    MapKey(&RMFD, OSB07, 0);
+    MapKey(&RMFD, OSB08, 0);
+    MapKey(&RMFD, OSB09, 0);
+    MapKey(&RMFD, OSB10, 0);
+    MapKey(&RMFD, OSB11, 0);
+    MapKey(&RMFD, OSB12, 0);
+    MapKey(&RMFD, OSB13, 0);
+    MapKey(&RMFD, OSB14, 0);
+    MapKey(&RMFD, OSB15, 0);
+    MapKey(&RMFD, OSB16, 0);
+    MapKey(&RMFD, OSB17, 0);
+    MapKey(&RMFD, OSB18, 0);
+    MapKey(&RMFD, OSB19, 0);
+    MapKey(&RMFD, OSB20, 0);
+    MapKey(&RMFD, BRTU, 0);
+    MapKey(&RMFD, BRTD, 0);
+    MapKey(&RMFD, CONU, 0);
+    MapKey(&RMFD, COND, 0);
+}

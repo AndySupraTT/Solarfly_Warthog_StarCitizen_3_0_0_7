@@ -1,0 +1,61 @@
+// Copyright (c) 2015-2018 Derek Douville ("solarfly")
+//
+// Version 3.0_6
+// Jan 1, 2018 11:50AM PST
+//
+// Distributed freely under the MIT License.
+
+
+//===============================================================
+// PILOT (THAT MEANS YOU!) PLEASE SET THESE OPTIONS BELOW
+//===============================================================
+
+// TrackIR
+// *** TRACKIR IS BROKEN IN 2.0 ALPHA!!! MADNESS, JUST MADNESS!
+define TRACKIR 0  // 0 no trackir, 1 for trackir
+define TRACKIR_CENTER R_CTL+F9 // This is the key TrackIR is configured for centering
+
+// 3 curves and 3 corresponding zooms are set here. These are set by the FLAPS
+// switch.  Set these to whatever makes sense for your flying style.
+//        Flaps... Up, MVR, DN
+short JS_CURVE[] = {0, 1, 2};  // default, M50, Hornet for example
+short JS_ZOOM[]  = {0, 0, 1};  // Keep the ; at the end of the lines!
+
+
+// Rudder Setting
+//
+// RUDDERS 1: You have rudders. Strafe lateral and roll will be on the pedals.
+// RUDDERS 0: No rudders. Strafe lateral on SCX (slew) and roll CSL/R (coolie hat).
+//
+// If you have rudders, set RUDDERS 1; If you have Thrustmaster T.Flight, set RUDDER 2.
+// This will enable T.Flight rudders in TARGET. Saitek users will need to load the
+// layout_solarfly_stk2 XML in Star Citizen (see README).
+//
+define RUDDERS 1         // 0 for no rudders, 1 for rudders, 2 for T.Flight rudders
+define ROLL_ON_MS 1      // When RUDDERS=0, set this to 0 for roll on CSL/R and strafe on MSL/R; 1 for the opposite
+
+// MFD (Thrustmaster Cougar Multi-Function Display)
+//
+// If you have one MFD, set this to 1. If you have two MFDs, set it to 2.  Only the left one is used right now.
+// These will be used for sheer awesomeness.
+define USEMFD 0
+
+// Which key for teamspeak or in-game comms. (DO NOT PICK A KEY ALREADY IN USE)
+// I guarantee the BRK key (Pause/Break) will not cause a profile conflict,
+// and recommend changing it in TeamSpeak options instead of changing it here.
+define MIC_PTT BRK
+
+// Throttle Deadzone - Decoupled Strafe BSF
+//
+// Strafe Forward and Back is controlled by the Right Throttle when the Boat Switch
+// is flipped to Forward (Decoupled + Strafe). See BSF on the diagram.
+// A LTHR_OVER_DEADZONE of 100 is not recommended, which disables this (use BSB instead).
+
+define THR_STRAFE_DEADZONE 20   // 0 to 100
+define THR_STRAFE_CURVE 4       // Smooth it out for better control
+define SLIDER_FINE_CTL_LIMIT 1   // Restrict how fast we'll accidentally accelerate
+define SLIDER_FINE_CTL_CURVE 5    // Keep it smooth, for landing/docking
+
+
+// Eject Timeout
+define EJECT_DELAY 1200 // ms

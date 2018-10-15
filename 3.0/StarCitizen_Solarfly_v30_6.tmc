@@ -1,0 +1,280 @@
+// Copyright (c) 2015-2018 Derek Douville ("solarfly")
+//
+// Version 3.0_6
+// Jan 1, 2018 11:50AM PST
+//
+// Distributed freely under the MIT License.
+
+
+include "target.tmh"
+include "solarfly.tmh"
+include "solarfly_mfd.tmh"
+
+int main()
+{
+	Configure(&HCougar, MODE_EXCLUDED);
+	Configure(&T16000, MODE_EXCLUDED);
+	Configure(&T16000L, MODE_EXCLUDED);
+	Configure(&TWCSThrottle, MODE_EXCLUDED);
+	if (USEMFD == 0) {
+        Configure(&LMFD, MODE_EXCLUDED);
+        Configure(&RMFD, MODE_EXCLUDED);
+    }
+    if (RUDDERS < 2) {
+        Configure(&TFRPRudder, MODE_EXCLUDED);
+    } else {
+        Configure(&TFRPRudder, MODE_FILTERED);
+    }
+	if(Init(&EventHandle)) return 1;
+	
+	if (RUDDERS == 2) {
+        MapAxis(&TFRPRudder, TRUDDER, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+        MapAxis(&TFRPRudder, TRPLEFT, DX_XROT_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
+        MapAxis(&TFRPRudder, TRPRIGHT, DX_YROT_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
+    }
+       
+    SetKBRate(40, 35);
+	SetKBLayout(KB_ENG);
+	
+	// =======================================================================================
+	// Initialize MFD Assignments
+	if (USEMFD > 0)
+        init_mfd_left();
+    if (USEMFD > 1)
+        init_mfd_right();
+
+    // =======================================================================================
+    // Initialize the Joystick & Throttle AXIS Assignments
+    // ---------------------------------------------------------------------------------------
+    //   (Curve/Zoom can be chosen by using the FLAPS switch).
+    MapAxis(&Joystick, JOYX, DX_X_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+    MapAxis(&Joystick, JOYY, DX_Y_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+    MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_REVERSED, MAP_ABSOLUTE); // vertical; js1_slider1
+    MapAxis(&Joystick, 0, MOUSE_X_AXIS, AXIS_NORMAL, MAP_RELATIVE);
+    MapAxis(&Joystick, 0, MOUSE_Y_AXIS, AXIS_NORMAL, MAP_RELATIVE);
+    MapAxis(&Joystick, 0, MOUSE_Z_AXIS, AXIS_NORMAL, MAP_RELATIVE);
+
+    SetSCurve(&Throttle, THR_FC, 0, 0, 0, SLIDER_FINE_CTL_CURVE, SLIDER_FINE_CTL_LIMIT);
+    sc_set_joystick_curves();  // Init using custom curves in pilot_settings.tmh
+    sc_set_throttle_norm();  // &Throttle, THR_RIGHT
+
+    //MapAxis(&Throttle, SCX, MOUSE_X_AXIS, AXIS_NORMAL, MAP_RELATIVE);
+	//SetSCurve(&Throttle, SCX, 0, 50, 0, -8, -10);
+    MapAxis(&Throttle, SCX, 0, AXIS_NORMAL, MAP_RELATIVE);
+	MapAxis(&Throttle, SCY, 0, AXIS_NORMAL, MAP_ABSOLUTE);
+	//SetSCurve(&Throttle, SCY, 0, 0, 0, 0, 0);
+
+    // =======================================================================================
+    // ---------------------------------------------------------------------------------------
+    // JOYSTICK FUNCTION ASSIGNMENTS
+    // ---------------------------------------------------------------------------------------
+
+    // -- Shift States --
+    // PSM: Defensive (Shield Control)
+    // PSF: Offensive (Power & Weapon Control)  -- Buggy in 3.0
+    // PSB: Cockpit/3rd Person View Mode Using Stick/Hat1
+    // EACON: Inner Thought Mode
+	SetShiftButton(&Throttle, EACON, &Throttle, PSF, PSB); //  InnerThought Control Switch, Offense/Defense/View Mode
+	
+	// EFLNORM sets Afterburner mode to toggle; EFLOVER sets it to momentary hold.
+    MapKey(&Throttle, EFLNORM, EXEC("sc_init_burn_toggle();"));  // Reset afterburner state variables
+    MapKeyR(&Throttle, EFLNORM, EXEC("sc_init_burn_toggle();"));  // Reset afterburner state variables
+    sc_init_burn_toggle();
+    
+    // -- FIRE CONTROL -----------------------------------------------------------------------
+    //MapKey(&Joystick, TG1, DX1);  // fire group 1
+	//MapKey(&Joystick, S1, DX5);   // fire group 2
+	// MapKey(&Joystick, TG2, DX5);  // 2nd stage trigger also fires Group 2
+    sc_set_tg1_h4p(); // TG1 and S1 depend on RDRALT position
+    MapKey(&Joystick, S1, PULSE+v_weapon_cycle_countermeasure_fwd);   // Fire Missile / fire group 3
+    MapKey(&Joystick, S2, DX2);   // Lock/Fire Missile / fire group 3
+    MapKey(&Joystick, S3, PULSE+v_weapon_launch_countermeasure);   // Fire Countermeasures 3.0, 2.4 bug which required keyboard
+    MapKey(&Joystick, S4, DX4);   // Fire Group 4
+    
+    // -- H1 VIEW MANAGEMENT ----------------------------------------------------------
+    // CIG 3.0 Design Flaw - Wondering if Look Around will ever be available again during flight
+    MapKey(&Joystick, H1U, v_view_pitch_up);  // Note now the stick X axis also functions
+    MapKey(&Joystick, H1D, v_view_pitch_down);
+    MapKey(&Joystick, H1L, v_view_yaw_left);
+    MapKey(&Joystick, H1R, v_view_yaw_right);
+    
+    MapKey(&Joystick, H3U, v_view_zoom_in); // Zoom In/Dynamic Zoom In/Inner Thought Zoom
+	MapKey(&Joystick, H3D, v_view_zoom_out); // Zoom Out 
+
+    // -- TARGET MANAGEMENT --------------------------------------------------
+    // H2
+    MapKey(&Joystick, H2U, TEMPO(PULSE+v_target_nearest_hostile,   // short: target
+        PULSE+v_target_toggle_pinned_focused, 300));               // long:  pin the target
+	MapKey(&Joystick, H2D, TEMPO(PULSE+v_target_reticle_focus,     // short: target
+	   PULSE+v_target_toggle_pinned_focused, 300));                // long: pin the target
+    MapKey(&Joystick, H2R, TEMPO(PULSE+v_target_cycle_hostile_fwd,          // Short: Cycle Hostile fwd
+                                 PULSE+v_target_cycle_hostile_back, 300));   // Long: Cycle hostile Back
+    MapKey(&Joystick, H2L, TEMPO(PULSE+v_target_cycle_friendly_fwd,         // Short: Cycle Friendly Fwd
+                                 PULSE+v_target_cycle_friendly_back, 300));  // Long: cycle Friendly Back
+
+    // H3 - Subsystem, Pinned Target and HUD select management
+    MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
+    MapKey(&Joystick, H3L, TEMPO(PULSE+v_target_cycle_pinned_fwd, PULSE+v_target_cycle_pinned_back, 300)); // S: Cycle pinned back 
+	
+	// ** H4 SHIELD / POWER MANAGEMENT / HUD CONTROL**
+	// PSM, H4 controls shields Fwd, Back, Left, Right; MSU/D on throttle controls top/bot
+	// PSF: H4 controls Power distribution to G1, G2, G3, Normalize; MSU/D controls power throttle
+	//                        PSF,          PSM,      PSD
+	MapKeyUMD(&Throttle, MSU, v_power_throttle_up, v_shield_up, 0);          // Increase Power / Shield Top
+	MapKeyUMD(&Throttle, MSD, v_power_throttle_down, v_shield_down, 0);        // Decrease Power / Shield Bot
+
+// --------  POWER MANAGEMENT -----------------------------------------------
+// I = EACARM
+// O = EACOFF
+// U/M/D = PSF PSM PSF
+// XXX CIG BUG - POWER DISTRIBUTION IS BROKEN
+//	MapKeyIOUMD(&Joystick, H4U, 0, CHAIN(PULSE+power_ctl[1], PULSE+power_ctl[3]), v_shield_forward, v_shield_forward, 0, 0);  // Neg G3 (cool!) / Shield Fwd/ HUD Up
+//	MapKeyIOUMD(&Joystick, H4R, 0, PULSE+power_ctl[1], 0, v_shield_right, 0, 0);  // Power G3 / Shield Right / HUD Right
+//	MapKeyIOUMD(&Joystick, H4D, 0, PULSE+power_ctl[2], 0, v_shield_back, 0, 0);  // Power G2 / Shield Down / HUD Down
+//	MapKeyIOUMD(&Joystick, H4L, 0, PULSE+power_ctl[3], 0, v_shield_left, 0, 0);  // Power G1 / Shield Left / HUD Left
+
+    MapKey(&Joystick, H4U, v_shield_forward);
+    MapKey(&Joystick, H4D, v_shield_back);
+    MapKey(&Joystick, H4L, v_shield_left);
+    MapKey(&Joystick, H4R, v_shield_right);
+
+    // =======================================================================================
+    // ---------------------------------------------------------------------------------------
+    // THROTTLE
+    // ---------------------------------------------------------------------------------------
+
+    // -- RUDDER / STRAFE SETUP --------------------------------------------------------------
+    // Combat Strafe Up/Down is mapped to CSU/CSU in all configurations.
+    //
+    // If RUDDER is 1, roll and strafe lateral will be assigned to the rudders and pedals.
+    // If RUDDER is 0:
+    //    - Roll will be assigned to CSL/CSR.
+    //    - Strafe L/R will be mapped to SCX Axis   
+    MapKey(&Throttle, CSU, v_strafe_up);    // Combat Strafe Vertical Up
+    MapKey(&Throttle, CSD, v_strafe_down);  // Combat Strafe Vertical Up  
+    if (!RUDDERS) {
+        printf("No rudders\x0a");
+        if (ROLL_ON_MS) {
+            printf("Roll on MS\x0a");
+       	    MapKey(&Throttle, CSR, v_strafe_right);
+       	    MapKey(&Throttle, CSL, v_strafe_left);
+    	    MapKey(&Throttle, MSR, v_roll_right);
+       	    MapKey(&Throttle, MSL, v_roll_left);
+       	} else {
+            printf("Roll on CS\x0a");
+    	    MapKey(&Throttle, CSR, v_roll_right);
+       	    MapKey(&Throttle, CSL, v_roll_left);
+       	    MapKey(&Throttle, MSR, v_strafe_right);
+       	    MapKey(&Throttle, MSL, v_strafe_left);
+        }       	    
+    } else {
+        MapKey(&Throttle, CSR, v_strafe_right);
+        MapKey(&Throttle, CSL, v_strafe_left);
+  	    MapKey(&Throttle, MSR, 0);
+        MapKey(&Throttle, MSL, 0);
+
+    }
+
+    // TODO Reorganize this section of code, omg professionally you'd fire a dude
+    
+    // Countermeasures Cycling / PIP Mode / Gimbals / Look Ahead modes
+
+
+    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_lock, PULSE+v_couple_aim_to_move, 300));
+
+    // -- Engine Power Off (Pull back on throttle)
+    printf("   * * * NOTE! If throttle Idle pulled back to detent, use ENGLOVER to override and fix throttle position\x0a");
+	MapKey(&Throttle, IDLERON, PULSE+v_power_toggle_group_3);  // Right throttle [6]
+	MapKey(&Throttle, IDLEROFF, PULSE+v_power_toggle_group_3); // Right throttle [6]
+	MapKey(&Throttle, IDLELON, 0);  // Reserved for future
+	MapKey(&Throttle, IDLELOFF, 0);
+
+    // -- HUD Controls (See also H4 under Joystick section)
+    printf("   * * * NOTE! If EACON was flipped on at startup, HUD mode may be reversed. Use F3 key to toggle it.\x0a");
+    printf("   * * * NOTE! IF PSB was flipped on at startup, center it to PSM.\x0a");
+    // CIG bug work around: Zoom out first before going into Inner Thought mode
+    MapKey(&Throttle, EACON, CHAIN(PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100),DOWN+pc_interaction_mode)); // Welcome to the new HUD Entry switch.
+    MapKey(&Throttle, EACOFF, UP+pc_interaction_mode);
+	MapKey(&Throttle, PSB, DOWN+v_view_freelook_mode);
+	MapKeyR(&Throttle, PSB, UP+v_view_freelook_mode);
+
+	// -- Push to Talk & Comms -----------------------------------------------
+    MapKey(&Throttle, MSP, MIC_PTT);   // Match teamspeak or whatever key to the pilot_settings
+
+    // -- Brake / Afterburners / Flight Control ------------------------------
+    printf("   * * * NOTE! If you want SPDF Afterburner to work as a toggle instead of a switch, set EFLNORM\x0a");
+    MapKey(&Throttle, SPDF, EXEC("sc_brake_burn();"));
+	MapKeyR(&Throttle, SPDF, EXEC("sc_brake_burnR();"));
+	MapKey(&Throttle, SPDB, EXEC("sc_boost_burn();"));  // This is some seriously awesome voodoo magic, thank you
+	MapKeyR(&Throttle, SPDB, EXEC("sc_boost_burnR();"));
+	MapKey(&Throttle, BSB, EXEC("sc_set_decoupling();"));  // Decouple
+	MapKeyR(&Throttle, BSB, EXEC("sc_set_decoupling();")); // Coupled  (BSM on)
+    printf("   * * * NOTE: If COUPLED/DECOUPLED is backwards (BSF, BSM, BSB), use c to toggle it.\x0a");
+    MapKey(&Throttle, BSF, EXEC("sc_set_decoupling(); sc_set_throttle_strafe();"));  // Decouple and enable longitudinal strafe on THR
+	MapKeyR(&Throttle, BSF, EXEC("sc_set_decoupling(); sc_set_throttle_norm();")); // Coupled  (BSM on)  
+
+
+
+    // -- EJECT EJECT EJECT --------------------------------------------------
+    MapKey(&Throttle, APUON, TEMPO(0, PULSE+v_eject, EJECT_DELAY));  // EJECT 2 sec delay
+	MapKey(&Throttle, APUOFF, PULSE+'x');  // Reset (x)
+
+    // -- Throttle Axis & Dynamic Sensitivity Curves -------------------------
+    MapKey(&Throttle, EFRNORM, PULSE+v_toggle_yaw_roll_swap);   // inverted protect
+    MapKeyR(&Throttle, EFRNORM, PULSE+v_toggle_yaw_roll_swap);  // inverted protect
+    MapKey(&Throttle, FLAPU, EXEC("sc_set_joystick_curves();"));   // This is also awesome voodoo magic
+    MapKeyR(&Throttle, FLAPU, EXEC("sc_set_joystick_curves();"));
+    MapKey(&Throttle, FLAPM, 0);
+    MapKey(&Throttle, FLAPD, EXEC("sc_set_joystick_curves();"));
+    MapKeyR(&Throttle, FLAPD, EXEC("sc_set_joystick_curves();"));
+    
+    // View Modes
+    MapKey(&Throttle, SC, v_view_look_behind); // Look Behind    
+    MapKey(&Throttle, EOLMOTOR, 0);
+    MapKeyR(&Throttle, EOLMOTOR, 0);
+
+    MapKey(&Throttle, EOLIGN,  TEMPO(PULSE+v_view_cycle_fwd, PULSE+v_view_mode,300));
+	MapKey(&Throttle, EOLNORM, 0);
+
+    MapKey(&Throttle, EORNORM, 0);
+    MapKey(&Throttle, EORMOTOR, PULSE+mobiglass_scoreboard);  // Seems more like a Thrustmaster MFD thing/keyboard though
+    MapKeyR(&Throttle, EORMOTOR, PULSE+mobiglass_scoreboard);
+    MapKey(&Throttle, EORIGN,  PULSE+v_starmap); // Toggle the Starmap
+
+
+    MapKey(&Throttle, RDRNRM, EXEC("sc_set_tg1_h4p();"));  // Swap TG1 and TG2 group assignments
+	MapKey(&Throttle, RDRDIS, EXEC("sc_set_tg1_h4p();"));
+	printf("   * * * NOTE: If Trigger fires Group 2 and you wanted Group 1, flip RDR ALTM switch to NRM.\x0a");
+	MapKey(&Throttle, APAH, 0);  // Flight Modes
+
+	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_comstab, 300)); // S: Gforce Safety, L: Comstab
+    MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_ifcs_toggle_esp, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
+
+// ===============  NAVIGATION, QDRIVE, RADAR MANAGEMENT ========================================================
+	MapKey(&Throttle, APPAT, 0);
+	MapKeyR(&Throttle, APPAT, 0);
+	MapKey(&Throttle, APALT, 0);  // Landing Mode when Engage pressed
+    MapKey(&Throttle, APENG, TEMPO(EXEC("sc_set_ap_mode_engage(AP_SHORT);"), EXEC("sc_set_ap_mode_engage(AP_LONG);"), 300));
+    MapKeyR(&Throttle, APENG, EXEC("sc_set_ap_mode_engage(AP_RELEASE);"));
+    MapKey(&Throttle, APDIS, 0);
+    MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_engagement, PULSE+v_toggle_qdrive_system, 300)); // S: qdrive, L: engage
+}
+
+
+int EventHandle(int type, alias o, int x)
+{
+	int dev = x;
+
+    if(&o == &TFRPRudder) {
+    	// T.Flight rudders accessed by direct hardware. Swap them to match profile.
+    	// Huge thanks to @samneric from the RSI forums for helping me debug this all day!
+		GetAxisData(&o, x);
+    	if (axdata.dxmap == DX_XROT_AXIS) dev = TRPRIGHT;
+    	else if (axdata.dxmap == DX_YROT_AXIS) dev = TRPLEFT;
+    
+		axdata.val = AxisVal(o[x], &axdata);
+		GameOutput(&o, dev, AxisVal(o[x], &axdata));
+		return 0;
+   	}
+    DefaultMapping(&o, x);
+}
