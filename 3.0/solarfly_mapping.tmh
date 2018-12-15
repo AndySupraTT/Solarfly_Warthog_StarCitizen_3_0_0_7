@@ -74,8 +74,10 @@ define v_toggle_relative_mouse_mode R_CTL+'x' // 2.4 OK XXX 3.0 ???
 define v_toggle_weapon_gimbal_lock L_ALT+'j'  // 3.0 OK 
 define v_couple_aim_to_move L_ALT+'m'    // 3.0 OK - "Look Ahead"
 // RADAR functions but these are under spaceship_targeting
-define scan_toggle_mode 'o'   // 3.0 --; Solarfly
-define scan_active_ping R_CTL+'o'   // 3.0 --; Solarfly
+//define scan_toggle_mode 'o'   // 3.0 --; Solarfly
+//define scan_active_ping R_CTL+'o'   // 3.0 --; Solarfly
+define scan_toggle_mode TAB   // 3.0 --; Solarfly
+define scan_active_ping TAB   // 3.0 --; Solarfly
 
 // Power Management // 2.4 OK
 define v_power_focus_group_1  '1'   // 3.0 OK - Divert power to Weapons
