@@ -1,7 +1,8 @@
 // Copyright (c) 2015-2018 Derek Douville ("solarfly")
+// Modified (slightly) by AndyC. All rights still belong to Solarfly
 //
-// Version 3.0_6
-// Jan 1, 2018 11:50AM PST
+// Version 3.4_1
+// Dec 15, 2018 18:31 GMT
 //
 // Distributed freely under the MIT License.
 
@@ -98,8 +99,8 @@ int main()
     MapKey(&Joystick, H1L, v_view_yaw_left);
     MapKey(&Joystick, H1R, v_view_yaw_right);
     
-    MapKey(&Joystick, H3U, v_view_zoom_in); // Zoom In/Dynamic Zoom In/Inner Thought Zoom
-	MapKey(&Joystick, H3D, v_view_zoom_out); // Zoom Out 
+    //MapKey(&Joystick, H3U, v_view_zoom_in); // Zoom In/Dynamic Zoom In/Inner Thought Zoom
+	//MapKey(&Joystick, H3D, v_view_zoom_out); // Zoom Out 
 
     // -- TARGET MANAGEMENT --------------------------------------------------
     // H2
@@ -115,6 +116,10 @@ int main()
     // H3 - Subsystem, Pinned Target and HUD select management
     MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
     MapKey(&Joystick, H3L, TEMPO(PULSE+v_target_cycle_pinned_fwd, PULSE+v_target_cycle_pinned_back, 300)); // S: Cycle pinned back 
+    MapKey(&Joystick, H3U, TEMPO(PULSE+v_target_cycle_subsystem_fwd,
+							     PULSE+v_target_cycle_subsystem_back, 300)); // short: Cycle Target subsys forward
+    MapKey(&Joystick, H3D, TEMPO(PULSE+v_target_cycle_subsystem_reset,
+    							 PULSE+v_target_cycle_subsystem_reset, 300)); // S: Remove Target subsys. 
 	
 	// ** H4 SHIELD / POWER MANAGEMENT / HUD CONTROL**
 	// PSM, H4 controls shields Fwd, Back, Left, Right; MSU/D on throttle controls top/bot
@@ -257,7 +262,8 @@ int main()
     MapKey(&Throttle, APENG, TEMPO(EXEC("sc_set_ap_mode_engage(AP_SHORT);"), EXEC("sc_set_ap_mode_engage(AP_LONG);"), 300));
     MapKeyR(&Throttle, APENG, EXEC("sc_set_ap_mode_engage(AP_RELEASE);"));
     MapKey(&Throttle, APDIS, 0);
-    MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_engagement, PULSE+v_toggle_qdrive_system, 300)); // S: qdrive, L: engage
+    MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_engagement, (CHAIN( DOWN+v_toggle_qdrive_system, D(1000), UP+v_toggle_qdrive_system)), 300)); // S: qdrive, L: engage
+    //MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_engagement, PULSE+v_toggle_qdrive_system, 300)); // S: qdrive, L: engage
 }
 
 

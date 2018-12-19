@@ -1,7 +1,8 @@
 // Copyright (c) 2015-2018 Derek Douville ("solarfly")
+// Modified (slightly) by AndyC. All rights still belong to Solarfly
 //
-// Version 3.0_6
-// Jan 1, 2018 11:50AM PST
+// Version 3.4_1
+// Dec 15, 2018 18:31 GMT
 //
 // Distributed freely under the MIT License.
 
@@ -52,7 +53,7 @@ define v_ifcs_toggle_vector_decoupling 'c'     // 2.4 default was x.
 define v_toggle_landing_system 'n'     // 3.0 OK
 define v_autoland 'n' // 3.0 OK But Long-Press XXX needs remap to r_ctrl+n
 define v_toggle_qdrive_engagement 'b'   // 2.6 OK  XXX 3.0 B Long-press to engage, this should be a separate binding
-define v_toggle_qdrive_system R_CTL+'b'       // 2.6  OK XXX 3.0 this might still need a separate binding, don't like the short-press clear BS
+define v_toggle_qdrive_system 'b'       // 2.6  OK XXX 3.0 this might still need a separate binding, don't like the short-press clear BS
 
 // ========================== TARGET MANAGEMENT ============================================
 
@@ -69,6 +70,9 @@ define v_target_cycle_pinned_fwd DX14         // 3.0 'o'
 define v_target_cycle_pinned_back R_CTL+DX14  // 3.0 'l' L
 //define v_target_cycle_subsystem_fwd DX27      // Reserved future: not mapped in XML
 //define v_target_cycle_subsystem_back DX28     // Reserved future: not mapped in XML
+define v_target_cycle_subsystem_reset 'i'   // 3.4; AndyC
+define v_target_cycle_subsystem_fwd 'o'   // 3.4; AndyC
+define v_target_cycle_subsystem_back 'p'  // 3.4; AndyC
 define v_target_toggle_pinned_focused 'p'     // 3.0 OK 
 define v_toggle_relative_mouse_mode R_CTL+'x' // 2.4 OK XXX 3.0 ???
 define v_toggle_weapon_gimbal_lock L_ALT+'j'  // 3.0 OK 
@@ -76,8 +80,8 @@ define v_couple_aim_to_move L_ALT+'m'    // 3.0 OK - "Look Ahead"
 // RADAR functions but these are under spaceship_targeting
 //define scan_toggle_mode 'o'   // 3.0 --; Solarfly
 //define scan_active_ping R_CTL+'o'   // 3.0 --; Solarfly
-define scan_toggle_mode TAB   // 3.0 --; Solarfly
-define scan_active_ping TAB   // 3.0 --; Solarfly
+define scan_toggle_mode TAB   // 3.0 --; AndyC
+define scan_active_ping TAB   // 3.0 --; AndyC (currently activated by trigger)
 
 // Power Management // 2.4 OK
 define v_power_focus_group_1  '1'   // 3.0 OK - Divert power to Weapons
