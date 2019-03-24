@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2018 Derek Douville ("solarfly")
 //
-// Version 3.0_6
+// Version 3.5
 // Jan 1, 2018 11:50AM PST
 //
 // Distributed freely under the MIT License.
@@ -39,6 +39,11 @@ define ROLL_ON_MS 1      // When RUDDERS=0, set this to 0 for roll on CSL/R and 
 // If you have one MFD, set this to 1. If you have two MFDs, set it to 2.  Only the left one is used right now.
 // These will be used for sheer awesomeness.
 define USEMFD 0
+
+// Game Glass MFD. 
+// 
+//Frees / switches a selection of buttons that are on a tablet device instead.
+define GAMEGLASS 0
 
 // Which key for teamspeak or in-game comms. (DO NOT PICK A KEY ALREADY IN USE)
 // I guarantee the BRK key (Pause/Break) will not cause a profile conflict,
