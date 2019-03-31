@@ -114,7 +114,7 @@ int main()
                                  PULSE+v_target_cycle_friendly_back, 300));  // Long: cycle Friendly Back
 
     // H3 - Subsystem, Pinned Target and HUD select management
-    MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
+//    MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
     MapKey(&Joystick, H3L, TEMPO(PULSE+v_target_cycle_pinned_fwd, PULSE+v_target_cycle_pinned_back, 300)); // S: Cycle pinned back 
     MapKey(&Joystick, H3U, TEMPO(PULSE+v_target_cycle_subsystem_fwd,
 							     PULSE+v_target_cycle_subsystem_back, 300)); // short: Cycle Target subsys forward
@@ -185,7 +185,7 @@ int main()
     // Countermeasures Cycling / PIP Mode / Gimbals / Look Ahead modes
 
 
-    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_lock, PULSE+v_couple_aim_to_move, 300));
+    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_mode, PULSE+v_couple_aim_to_move, 300));
 
     // -- Engine Power Off (Pull back on throttle)
     printf("   * * * NOTE! If throttle Idle pulled back to detent, use ENGLOVER to override and fix throttle position\x0a");
@@ -252,7 +252,8 @@ int main()
 	printf("   * * * NOTE: If Trigger fires Group 2 and you wanted Group 1, flip RDR ALTM switch to NRM.\x0a");
 	MapKey(&Throttle, APAH, 0);  // Flight Modes
 
-	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_comstab, 300)); // S: Gforce Safety, L: Comstab
+	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, 300)); // S: Gforce Safety, L: Comstab
+//	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_comstab, 300)); // S: Gforce Safety, L: Comstab
     MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_ifcs_toggle_esp, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
 
 // ===============  NAVIGATION, QDRIVE, RADAR MANAGEMENT ========================================================
