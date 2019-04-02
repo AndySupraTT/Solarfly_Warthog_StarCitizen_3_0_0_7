@@ -3,8 +3,8 @@ Solarfly's Thrustmaster WARTHOG Profile for STAR CITIZEN
 ==================================================================
 ==================================================================
 ==================================================================
-=== DEVELOPMENT RELEASE FOR 3.0 PTU - THIS IS UNFINISHED
-=== USE AT YOUR OWN RISK - 3_0_2 2017-12-03
+=== DEVELOPMENT RELEASE FOR 3.5 PTU - THIS IS UNFINISHED
+=== USE AT YOUR OWN RISK - 3_5_0
 === THIS CODE IS IN ACTIVE DEVELOPMENT AND WILL CHANGE FREQUENTLY
 ==================================================================
 ==================================================================
@@ -30,12 +30,12 @@ QUICK START
 
 4. In both Arena Commander and Universe, you will have to 
    a.  pp_rebindkeys
-   b.  pp_rebindkeys layout_solarfly_tm1
+   b.  pp_rebindkeys layout_Thrustmaster1_Rud2_v35 (Currently a ruddered version, will do a non rudder later. Just rebind in Star Citizen yaw and strafe back
    c.  Optionally, load your rudder overlay file (see Detailed Installation below)
 
 
 
-ABOUT ME
+ABOUT Solarfly
 --------
 I'm a professional tools developer for a startup in the Bay Area. I have been writing
 and updating this Warthog HOTAS profile since StarCitizen Arena Commander 0.8 was
@@ -52,3 +52,12 @@ https://robertsspaceindustries.com/spectrum/community/SC/forum/50174/thread/sola
 Happy flying!
 Derek "Solarfly" Douville
 California, USA
+
+ABOUT Me
+--------
+Senior Tech QA Engineer for a MMO in the UK. Mostly work in JAVA or in-house scripting language.
+
+This is the first time I've really got my teeth into T.A.R.G.E.T so sorry if it takes a while. Always happy to take suggestions on any changes.
+
+Andy C
+SC Tag: AndySupraTT

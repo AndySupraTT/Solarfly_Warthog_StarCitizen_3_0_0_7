@@ -12,7 +12,7 @@
 
 // ===========================  SPACESHIP GENERAL =====================================
 define v_self_destruct BSP       // 3.5 -- Toggle?
-define v_eject 'u'               // 3.5 -- Hold
+define v_eject 'y'               // 3.5 -- Hold
 define v_lights 't'  // 3.5 
 define v_respawn BSP  // 3.5
 define v_flightready 'r' // 3.5
@@ -23,17 +23,17 @@ define v_exit_seat 'y' //3.5
 //define v_doors_unlock_all F8 // 3.5 --
 
 // ===========================  Mining Systems =========================================
-define minig_toggle_mode 'm' //3.5
+define mining_toggle_mode 'm' //3.5
 
 
 // 
 // ===========================  SPACESHIP MOVEMENT =====================================
 
 // ...Actual movement
-define v_afterburner DX30 // 3.5 L_Shift
-define v_boost DX30       // No longer exists in 3.5 but set same as afterburner
-define v_brake DX32       //3.5 x 3.0 Z (DX31)  
-define v_match_target_velocity 'm'   // 3.0 -- May need to change this to set combat speed??
+define v_afterburner L_SHIFT // 3.5 L_Shift
+define v_boost L_SHIFT //DX30// No longer exists in 3.5 but set same as afterburner
+define v_brake 'x'       //3.5 x 3.0 Z (DX31)  
+define v_match_target_velocity ''   // 3.0 -- May need to change this to set combat speed??
 define v_strafe_left  'a'    // 3.5 Pedals bound to DX axis control, used for joystick
 define v_strafe_right 'd'    // 3.5   "         "           "
 define v_strafe_up    SPC    // 3.5 
@@ -48,8 +48,6 @@ define v_strafe_back 's' // 3.5 OK;
 //define v_yaw_right       // 2.6 Unmapped
 
 // ...ifcs
-//Removed for 3.5:
-//define v_ifcs_toggle_comstab R_CTL+'j'         // 3.0 Unmapped
 define v_ifcs_toggle_gforce_safety '' //R_CTL+'k'   // 3.0 Unmapped
 define v_ifcs_toggle_safeties '' //'v'        // 3.0 OK:  LMFD
 define v_ifcs_toggle_esp '' //L_ALT+'v'             // 3.0 --: 
@@ -81,7 +79,7 @@ define v_target_toggle_pinned_focused '1'     // 3.5 long press
 //define v_toggle_relative_mouse_mode R_CTL+'x' // 2.4 OK XXX 3.0 ???
 define v_toggle_weapon_gimbal_mode 'r' //3.5 
 //define v_toggle_weapon_gimbal_lock L_ALT+'j'  // 3.0 OK 
-define v_couple_aim_to_move '' //L_ALT+'m'    // 3.0 OK - "Look Ahead"
+define v_couple_aim_to_move L_ALT+'r' //L_ALT+'m'    // 3.0 OK - "Look Ahead"
 
 // RADAR functions but these are under spaceship_targeting
 //define scan_toggle_mode 'o'   // 3.0 --; Solarfly
@@ -121,15 +119,15 @@ define v_view_cycle_fwd F4         // 3.5 OK
 define v_view_look_behind 'z' //3.5 long press //DX21 3.0 --; Solarfly
 define v_view_toggle_headlook_mode L_ALT+'r' //3.5 Look ahead?
 //define v_view_toggle_headlook_mode DX24 // 2.4 OK: XML rebinding takes voodoo.  multiTap="0"; XXX 3.0 obsolete?
-define v_view_cycle_headlook_mode DX24 // 
-define v_view_freelook_mode 'z' //3.5  
+define v_view_cycle_headlook_mode '' //DX24 // 
+define v_view_freelook_mode 'z' //3.5
 define v_view_zoom_out DX13 // Might use this for the throttle limiter?
 define v_view_zoom_in DX11    // Might use this for the throttle limiter?
 define v_view_pitch_down DXHATDOWN     // For 3.0, we use the joystick itself under View mode to look around
 define v_view_pitch_up DXHATUP         // 
 define v_view_yaw_right DXHATRIGHT     // 
 define v_view_yaw_left DXHATLEFT       // 
-define v_view_mode DX24           // 3.0 z; Solarfly
+define v_view_mode 'z' //DX24 3.0 z; Solarfly
 define v_target_head_tracking R_CTL+'l'  // Custom   XXX 3.0 ???
 
 // Radar Management

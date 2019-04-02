@@ -54,12 +54,12 @@ int main()
     MapAxis(&Joystick, 0, MOUSE_X_AXIS, AXIS_NORMAL, MAP_RELATIVE);
     MapAxis(&Joystick, 0, MOUSE_Y_AXIS, AXIS_NORMAL, MAP_RELATIVE);
     MapAxis(&Joystick, 0, MOUSE_Z_AXIS, AXIS_NORMAL, MAP_RELATIVE);
+//    MapAxis(&Throttle, THR_FC, MOUSE_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 
-    SetSCurve(&Throttle, THR_FC, 0, 0, 0, SLIDER_FINE_CTL_CURVE, SLIDER_FINE_CTL_LIMIT);
+ //   SetSCurve(&Throttle, THR_FC, 0, 0, 0, SLIDER_FINE_CTL_CURVE, SLIDER_FINE_CTL_LIMIT);
     sc_set_joystick_curves();  // Init using custom curves in pilot_settings.tmh
     sc_set_throttle_norm();  // &Throttle, THR_RIGHT
 
-    //MapAxis(&Throttle, SCX, MOUSE_X_AXIS, AXIS_NORMAL, MAP_RELATIVE);
 	//SetSCurve(&Throttle, SCX, 0, 50, 0, -8, -10);
     MapAxis(&Throttle, SCX, 0, AXIS_NORMAL, MAP_RELATIVE);
 	MapAxis(&Throttle, SCY, 0, AXIS_NORMAL, MAP_ABSOLUTE);
@@ -200,8 +200,8 @@ int main()
     // CIG bug work around: Zoom out first before going into Inner Thought mode
     MapKey(&Throttle, EACON, CHAIN(PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100),DOWN+pc_interaction_mode)); // Welcome to the new HUD Entry switch.
     MapKey(&Throttle, EACOFF, UP+pc_interaction_mode);
-	MapKey(&Throttle, PSB, DOWN+v_view_freelook_mode);
-	MapKeyR(&Throttle, PSB, UP+v_view_freelook_mode);
+	MapKey(&Throttle, PSB, PULSE+v_view_freelook_mode);
+	MapKeyR(&Throttle, PSB, PULSE+v_view_freelook_mode);
 
 	// -- Push to Talk & Comms -----------------------------------------------
     MapKey(&Throttle, MSP, MIC_PTT);   // Match teamspeak or whatever key to the pilot_settings
@@ -210,8 +210,10 @@ int main()
     printf("   * * * NOTE! If you want SPDF Afterburner to work as a toggle instead of a switch, set EFLNORM\x0a");
     MapKey(&Throttle, SPDF, EXEC("sc_brake_burn();"));
 	MapKeyR(&Throttle, SPDF, EXEC("sc_brake_burnR();"));
-	MapKey(&Throttle, SPDB, EXEC("sc_boost_burn();"));  // This is some seriously awesome voodoo magic, thank you
-	MapKeyR(&Throttle, SPDB, EXEC("sc_boost_burnR();"));
+	MapKey(&Throttle, SPDB, v_afterburner); //3.5
+	MapKeyR(&Throttle, SPDB, v_boost); //3.5
+	//MapKey(&Throttle, SPDB, EXEC("sc_boost_burn();"));  // This is some seriously awesome voodoo magic, thank you
+	//MapKeyR(&Throttle, SPDB, EXEC("sc_boost_burnR();"));
 	MapKey(&Throttle, BSB, EXEC("sc_set_decoupling();"));  // Decouple
 	MapKeyR(&Throttle, BSB, EXEC("sc_set_decoupling();")); // Coupled  (BSM on)
     printf("   * * * NOTE: If COUPLED/DECOUPLED is backwards (BSF, BSM, BSB), use c to toggle it.\x0a");
