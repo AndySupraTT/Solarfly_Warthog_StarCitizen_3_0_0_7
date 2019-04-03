@@ -133,15 +133,10 @@ int main()
 // O = EACOFF
 // U/M/D = PSF PSM PSF
 // XXX CIG BUG - POWER DISTRIBUTION IS BROKEN
-//	MapKeyIOUMD(&Joystick, H4U, 0, CHAIN(PULSE+power_ctl[1], PULSE+power_ctl[3]), v_shield_forward, v_shield_forward, 0, 0);  // Neg G3 (cool!) / Shield Fwd/ HUD Up
-//	MapKeyIOUMD(&Joystick, H4R, 0, PULSE+power_ctl[1], 0, v_shield_right, 0, 0);  // Power G3 / Shield Right / HUD Right
-//	MapKeyIOUMD(&Joystick, H4D, 0, PULSE+power_ctl[2], 0, v_shield_back, 0, 0);  // Power G2 / Shield Down / HUD Down
-//	MapKeyIOUMD(&Joystick, H4L, 0, PULSE+power_ctl[3], 0, v_shield_left, 0, 0);  // Power G1 / Shield Left / HUD Left
-
-    MapKey(&Joystick, H4U, v_shield_forward);
-    MapKey(&Joystick, H4D, v_shield_back);
-    MapKey(&Joystick, H4L, v_shield_left);
-    MapKey(&Joystick, H4R, v_shield_right);
+	MapKeyIOUMD(&Joystick, H4U, 0, CHAIN(PULSE+power_ctl[1], PULSE+power_ctl[3]), v_shield_forward, v_shield_forward, 0, 0);  // Neg G3 (cool!) / Shield Fwd/ HUD Up
+	MapKeyIOUMD(&Joystick, H4R, 0, PULSE+power_ctl[1], 0, v_shield_right, 0, 0);  // Power G3 / Shield Right / HUD Right
+	MapKeyIOUMD(&Joystick, H4D, 0, PULSE+power_ctl[2], 0, v_shield_back, 0, 0);  // Power G2 / Shield Down / HUD Down
+	MapKeyIOUMD(&Joystick, H4L, 0, PULSE+power_ctl[3], 0, v_shield_left, 0, 0);  // Power G1 / Shield Left / HUD Left
 
     // =======================================================================================
     // ---------------------------------------------------------------------------------------
@@ -185,7 +180,7 @@ int main()
     // Countermeasures Cycling / PIP Mode / Gimbals / Look Ahead modes
 
 
-    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_mode, PULSE+v_couple_aim_to_move, 300));
+    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_lock, PULSE+v_couple_aim_to_move, 300));
 
     // -- Engine Power Off (Pull back on throttle)
     printf("   * * * NOTE! If throttle Idle pulled back to detent, use ENGLOVER to override and fix throttle position\x0a");
@@ -254,9 +249,9 @@ int main()
 	printf("   * * * NOTE: If Trigger fires Group 2 and you wanted Group 1, flip RDR ALTM switch to NRM.\x0a");
 	MapKey(&Throttle, APAH, 0);  // Flight Modes
 
-	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, 300)); // S: Gforce Safety, L: Comstab
+	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_esp, 300)); // S: Gforce Safety, L: ESP
 //	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_comstab, 300)); // S: Gforce Safety, L: Comstab
-    MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_ifcs_toggle_esp, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
+    MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_toggle_weapon_gimbal_mode, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
 
 // ===============  NAVIGATION, QDRIVE, RADAR MANAGEMENT ========================================================
 	MapKey(&Throttle, APPAT, 0);

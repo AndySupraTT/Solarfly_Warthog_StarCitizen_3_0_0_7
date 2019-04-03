@@ -48,9 +48,9 @@ define v_strafe_back 's' // 3.5 OK;
 //define v_yaw_right       // 2.6 Unmapped
 
 // ...ifcs
-define v_ifcs_toggle_gforce_safety '' //R_CTL+'k'   // 3.0 Unmapped
+define v_ifcs_toggle_gforce_safety R_CTL+'k'   // 3.5
 define v_ifcs_toggle_safeties '' //'v'        // 3.0 OK:  LMFD
-define v_ifcs_toggle_esp '' //L_ALT+'v'             // 3.0 --: 
+define v_ifcs_toggle_esp L_ALT+'v'             // 3.5 
 define v_ifcs_toggle_vector_decoupling 'v'     // 3.5
 
 // ...Landing/Qdrive Management
@@ -78,7 +78,7 @@ define v_target_cycle_subsystem_back L_ALT+'2' // 3.5; AndyC
 define v_target_toggle_pinned_focused '1'     // 3.5 long press 
 //define v_toggle_relative_mouse_mode R_CTL+'x' // 2.4 OK XXX 3.0 ???
 define v_toggle_weapon_gimbal_mode 'r' //3.5 
-//define v_toggle_weapon_gimbal_lock L_ALT+'j'  // 3.0 OK 
+define v_toggle_weapon_gimbal_lock 'r'  // 3.5 
 define v_couple_aim_to_move L_ALT+'r' //L_ALT+'m'    // 3.0 OK - "Look Ahead"
 
 // RADAR functions but these are under spaceship_targeting
@@ -101,13 +101,13 @@ define v_power_throttle_up    '7'  // 3.0 L_ALT+Num5 - increase power  XXX I thi
 define v_power_throttle_down  '8'  // 3.0 L_ALT+Num4 - decrease power  XXX ??
 
 // Shield Management
-define v_shield_forward DX15  // 3.5 NUM8
-define v_shield_right   DX16  // 3.5 NUM6
-define v_shield_back    DX17  // 3.5 NUM2
-define v_shield_left    DX18  // 3.5 NUM4
-define v_shield_up      DX27  // 3.5 NUM7
-define v_shield_down    DX29  // 3.5 NUM9
-define v_shield_reset   DX19  // 3.5 Num5
+define v_shield_forward KP8 // DX15  // 3.5 NUM8
+define v_shield_right   KP6 // DX16  // 3.5 NUM6
+define v_shield_back    KP2 // DX17  // 3.5 NUM2
+define v_shield_left    KP4 // DX18  // 3.5 NUM4
+define v_shield_up      KP7 // DX27  // 3.5 NUM7
+define v_shield_down    KP9 // DX29  // 3.5 NUM9
+define v_shield_reset   KP5 // DX19  // 3.5 Num5
 
 // =====================  Weapon Management ===================================================
 define v_weapon_launch_countermeasure 'g' // 3.5
