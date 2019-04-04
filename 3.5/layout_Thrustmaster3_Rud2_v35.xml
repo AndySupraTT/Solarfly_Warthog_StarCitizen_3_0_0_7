@@ -1,5 +1,5 @@
-<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="Thrustmaster3_Rud2_35">
- <CustomisationUIHeader label="Thrustmaster3_Rud2_35" description="" image="">
+<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="Warthog3_Rud2_35">
+ <CustomisationUIHeader label="Warthog3_Rud2_35" description="" image="">
   <devices>
    <keyboard instance="1"/>
    <mouse instance="1"/>
@@ -12,6 +12,7 @@
    <category label="@ui_CCVehicle"/>
    <category label="@ui_CGEASpectator"/>
    <category label="@ui_CGUIGeneral"/>
+   <category label="@ui_CCFPS"/>
    <category label="@ui_CGInteraction"/>
   </categories>
  </CustomisationUIHeader>
@@ -28,6 +29,24 @@
  </options>
  <modifiers />
  <actionmap name="spaceship_general">
+  <action name="v_cooler_throttle_down">
+   <rebind input="kb1_lalt+7"/>
+  </action>
+  <action name="v_cooler_throttle_up">
+   <rebind input="kb1_lalt+0"/>
+  </action>
+  <action name="v_doors_close_all">
+   <rebind input="kb1_lalt+8"/>
+  </action>
+  <action name="v_doors_lock_all">
+   <rebind input="kb1_lalt+r"/>
+  </action>
+  <action name="v_doors_open_all">
+   <rebind input="kb1_lalt+8"/>
+  </action>
+  <action name="v_doors_unlock_all">
+   <rebind input="kb1_lalt+r"/>
+  </action>
   <action name="v_eject">
    <rebind input="js1_ "/>
   </action>
@@ -48,10 +67,13 @@
    <rebind input="js1_ "/>
   </action>
   <action name="v_ifcs_toggle_esp">
-   <rebind input="kb1_lalt+v"/>
+   <rebind input="kb1_lalt+o"/>
   </action>
   <action name="v_ifcs_toggle_gforce_safety">
-   <rebind input="kb1_rctrl+k"/>
+   <rebind input="kb1_lalt+i"/>
+  </action>
+  <action name="v_ifcs_toggle_speed_limiter">
+   <rebind input="kb1_lalt+minus"/>
   </action>
   <action name="v_pitch">
    <rebind input="js3_y"/>
@@ -64,6 +86,9 @@
   </action>
   <action name="v_speed_range_rel">
    <rebind input="js3_ "/>
+  </action>
+  <action name="v_speed_range_up">
+   <rebind input="kb1_lalt+y"/>
   </action>
   <action name="v_strafe_back">
    <rebind input="js2_x"/>
@@ -81,13 +106,16 @@
    <rebind input="js3_ "/>
   </action>
   <action name="v_strafe_longitudinal_invert">
-   <rebind input="kb1_slash"/>
+   <rebind input="kb1_lalt+slash"/>
   </action>
   <action name="v_strafe_right">
    <rebind input="js1_ "/>
   </action>
   <action name="v_strafe_up">
    <rebind input="js1_ "/>
+  </action>
+  <action name="v_target_match_vel">
+   <rebind input="kb1_lalt+t"/>
   </action>
   <action name="v_toggle_landing_system">
    <rebind input="js1_ "/>
@@ -98,10 +126,14 @@
  </actionmap>
  <actionmap name="spaceship_targeting">
   <action name="v_invoke_ping">
+   <rebind defaultInput="mouse2" input="kb1_lalt+h"/>
    <rebind input="js3_button5"/>
   </action>
   <action name="v_target_cycle_reticle_mode">
-   <rebind input="kb1_lalt+k"/>
+   <rebind input="kb1_lalt+f"/>
+  </action>
+  <action name="v_target_head_tracking">
+   <rebind input="kb1_lalt+g"/>
   </action>
   <action name="v_target_reticle_focus">
    <rebind input="js1_ "/>
@@ -109,23 +141,29 @@
  </actionmap>
  <actionmap name="spaceship_ping">
   <action name="v_dec_ping_focus_angle">
+   <rebind defaultInput="mwheel_down" input="kb1_lalt+k"/>
    <rebind input="js1_ "/>
   </action>
   <action name="v_inc_ping_focus_angle">
+   <rebind defaultInput="mwheel_up" input="kb1_lalt+j"/>
    <rebind input="js1_ "/>
   </action>
  </actionmap>
  <actionmap name="spaceship_mining">
   <action name="v_decrease_mining_throttle">
+   <rebind input="mo1_lalt+mwheel_down"/>
    <rebind input="js1_ "/>
   </action>
   <action name="v_increase_mining_throttle">
+   <rebind input="mo1_lalt+mwheel_up"/>
    <rebind input="js1_ "/>
   </action>
   <action name="v_toggle_mining_laser_fire">
+   <rebind defaultInput="mouse1" input="kb1_lalt+l"/>
    <rebind input="js3_button5"/>
   </action>
   <action name="v_toggle_mining_laser_type">
+   <rebind defaultInput="mouse2" input="kb1_lalt+z"/>
    <rebind input="js1_ "/>
   </action>
  </actionmap>
@@ -157,6 +195,12 @@
   </action>
  </actionmap>
  <actionmap name="spaceship_defensive">
+  <action name="v_shield_raise_level_down">
+   <rebind input="kb1_np_7"/>
+  </action>
+  <action name="v_shield_raise_level_up">
+   <rebind input="kb1_np_9"/>
+  </action>
   <action name="v_weapon_cycle_countermeasure_fwd">
    <rebind input="js1_ "/>
   </action>
@@ -170,6 +214,18 @@
   </action>
   <action name="v_attack1_group2">
    <rebind input="js3_button1"/>
+  </action>
+  <action name="v_doors_close_all">
+   <rebind input="kb1_lalt+8"/>
+  </action>
+  <action name="v_doors_lock_all">
+   <rebind input="kb1_lalt+r"/>
+  </action>
+  <action name="v_doors_open_all">
+   <rebind input="kb1_lalt+8"/>
+  </action>
+  <action name="v_doors_unlock_all">
+   <rebind input="kb1_lalt+r"/>
   </action>
   <action name="v_horn">
    <rebind input="js1_ "/>
@@ -232,6 +288,110 @@
  <actionmap name="default">
   <action name="respawn">
    <rebind input="js3_button5"/>
+  </action>
+ </actionmap>
+ <actionmap name="player_emotes">
+  <action name="emote_agree">
+   <rebind input="kb1_lalt+np_1" activationMode="double_tap"/>
+  </action>
+  <action name="emote_angry">
+   <rebind input="kb1_lalt+np_2" activationMode="double_tap"/>
+  </action>
+  <action name="emote_atease">
+   <rebind input="kb1_lalt+np_3" activationMode="double_tap"/>
+  </action>
+  <action name="emote_attention">
+   <rebind input="kb1_lalt+np_4" activationMode="double_tap"/>
+  </action>
+  <action name="emote_blah">
+   <rebind input="kb1_lalt+np_5" activationMode="double_tap"/>
+  </action>
+  <action name="emote_bored">
+   <rebind input="kb1_lalt+np_6" activationMode="double_tap"/>
+  </action>
+  <action name="emote_bow">
+   <rebind input="kb1_lalt+np_7" activationMode="double_tap"/>
+  </action>
+  <action name="emote_burp">
+   <rebind input="kb1_lalt+np_8" activationMode="double_tap"/>
+  </action>
+  <action name="emote_cheer">
+   <rebind input="kb1_lalt+np_9" activationMode="double_tap"/>
+  </action>
+  <action name="emote_chicken">
+   <rebind input="kb1_lalt+p" activationMode="double_tap"/>
+  </action>
+  <action name="emote_clap">
+   <rebind input="kb1_lalt+o" activationMode="double_tap"/>
+  </action>
+  <action name="emote_come">
+   <rebind input="kb1_lalt+i" activationMode="double_tap"/>
+  </action>
+  <action name="emote_cry">
+   <rebind input="kb1_lalt+u" activationMode="double_tap"/>
+  </action>
+  <action name="emote_dance">
+   <rebind input="kb1_lalt+y" activationMode="double_tap"/>
+  </action>
+  <action name="emote_disagree">
+   <rebind input="kb1_lalt+l" activationMode="double_tap"/>
+  </action>
+  <action name="emote_failure">
+   <rebind input="kb1_lalt+k" activationMode="double_tap"/>
+  </action>
+  <action name="emote_flex">
+   <rebind input="kb1_lalt+j" activationMode="double_tap"/>
+  </action>
+  <action name="emote_flirt">
+   <rebind input="kb1_lalt+h" activationMode="double_tap"/>
+  </action>
+  <action name="emote_gasp">
+   <rebind input="kb1_lalt+g" activationMode="double_tap"/>
+  </action>
+  <action name="emote_gloat">
+   <rebind input="kb1_lalt+m" activationMode="double_tap"/>
+  </action>
+  <action name="emote_greet">
+   <rebind input="kb1_lalt+n" activationMode="double_tap"/>
+  </action>
+  <action name="emote_laugh">
+   <rebind input="kb1_lalt+b" activationMode="double_tap"/>
+  </action>
+  <action name="emote_launch">
+   <rebind input="kb1_lalt+f5" activationMode="double_tap"/>
+  </action>
+  <action name="emote_point">
+   <rebind input="kb1_lalt+f6" activationMode="double_tap"/>
+  </action>
+  <action name="emote_rude">
+   <rebind input="kb1_lalt+f7" activationMode="double_tap"/>
+  </action>
+  <action name="emote_salute">
+   <rebind input="kb1_lalt+f8" activationMode="double_tap"/>
+  </action>
+  <action name="emote_sit">
+   <rebind input="kb1_lalt+f9" activationMode="double_tap"/>
+  </action>
+  <action name="emote_sleep">
+   <rebind input="kb1_lalt+equals" activationMode="double_tap"/>
+  </action>
+  <action name="emote_smell">
+   <rebind input="kb1_lalt+minus" activationMode="double_tap"/>
+  </action>
+  <action name="emote_taunt">
+   <rebind input="kb1_lalt+oem_102" activationMode="double_tap"/>
+  </action>
+  <action name="emote_threaten">
+   <rebind input="kb1_lalt+backspace" activationMode="double_tap"/>
+  </action>
+  <action name="emote_wait">
+   <rebind input="kb1_lalt+semicolon" activationMode="double_tap"/>
+  </action>
+  <action name="emote_wave">
+   <rebind input="kb1_lalt+apostrophe" activationMode="double_tap"/>
+  </action>
+  <action name="emote_whistle">
+   <rebind input="kb1_lalt+period" activationMode="double_tap"/>
   </action>
  </actionmap>
  <actionmap name="player_choice">

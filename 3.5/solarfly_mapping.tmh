@@ -7,57 +7,83 @@
 // Distributed freely under the MIT License.
 
 
-// Keybindings to match StarCitizen Solarfly XML Mappings. DO NOT EDIT.
+// Keybindings to match StarCitizen XML Mappings. DO NOT EDIT.
 //
+// =========================== Flight - Cockpit =======================================
+
+define v_eject 					'y' 		// 3.5 -- Hold
+define v_exit_seat 				'y'			// 3.5
+define v_self_destruct 			BSP 		// 3.5 
+define v_cooler_throttle_up 	L_ALT+'0'	// 3.5
+define v_cooler_throttle_down 	L_ALT+'7'	// 3.5
+define v_flightready 			'r' 		// 3.5
+define v_doors_open_all 		L_ALT+'8' 	// 3.5 
+define v_doors_close_all 		L_ALT+'8'	// 3.5 
+define v_doors_lock_all 		L_ALT+'r' 	// 3.5 
+define v_doors_unlock_all 		L_ALT+'r'	// 3.5 
+
+// =========================== Flight - View ==========================================
+
+define v_view_pitch_down 		DXHATDOWN	// For 3.5, we use the joystick itself under View mode to look around
+define v_view_pitch_up 			DXHATUP     // 
+define v_view_yaw_right 		DXHATRIGHT  // 
+define v_view_yaw_left 			DXHATLEFT   // 
+define v_view_cycle_fwd 		F4			// 3.5 
+define v_view_freelook_mode 	'z' 		// 3.5
+define v_view_zoom_out 			DX13 		// 3.5
+define v_view_zoom_in 			DX11    	// 3.5
+define v_view_look_behind 		'z' 		// 3.5 -- Long-Press
+
+// =========================== Flight - Movement ======================================
+
+define v_toggle_relative_mouse_mode 	R_CTL+'x' 	// Not defined in SC
+define v_roll_left    					'q'  		// 3.5 
+define v_roll_right   					'e' 		// 3.5
+define v_toggle_yaw_roll_swap 			L_ALT+'.'  	// Not defined in SC
+define v_match_target_velocity 			L_ALT+'t'   // 3.5
+define v_brake 							'x'       	// 3.5
+define v_speed_range-up					L_ALT+'y'	// 3.5 New
+define v_ifcs_toggle_vector_decoupling	'v'     	// 3.5
+define v_strafe_up    					SPC	    	// 3.5 
+define v_strafe_down  					L_CTL  		// 3.5
+define v_strafe_left  					'a'    		// 3.5 Pedals bound to DX axis control, used for joystick
+define v_strafe_right 					'd'    		// 3.5   "         "           "
+define v_strafe_fwd 					'w' 	 	// 3.5
+define v_strafe_back 					's' 		// 3.5
+define v_ifcs_throttle_invert			L_ALT+'/'	// 3.5 New
+define v_ifcs_toggle_speed_limiter		L_ALT+'-'	// 3.5 New
+define v_ifcs_toggle_gforce_safety 		L_ALT+'i'   // 3.5
+define v_ifcs_toggle_esp 				L_ALT+'o' 	// 3.5
+define v_cruise_control					'c'	 		// 3.5
+define v_afterburner 					L_SHIFT 	// 3.5
+define v_boost 							L_SHIFT 	// Needs removing from scripts
+define v_toggle_landing_system 			'n'     	// 3.5
+define v_autoland 						'n' 		// 3.5 -- Long-Press
+define v_toggle_qdrive_system 			'b'      	// 3.5
+define v_toggle_qdrive_engagement 		'b'   		// 3.5 -- Long-press
 
 // ===========================  SPACESHIP GENERAL =====================================
-define v_self_destruct BSP       // 3.5 -- Toggle?
-define v_eject 'y'               // 3.5 -- Hold
+
+             
 define v_lights 't'  // 3.5 
 define v_respawn BSP  // 3.5
-define v_flightready 'r' // 3.5
-define v_exit_seat 'y' //3.5
-//define v_doors_open_all F6 // 3.5 --
-//define v_doors_close_all F6 // 3.5 --
-//define v_doors_lock_all F8 // 3.5 --
-//define v_doors_unlock_all F8 // 3.5 --
 
 // ===========================  Mining Systems =========================================
 define mining_toggle_mode 'm' //3.5
-
 
 // 
 // ===========================  SPACESHIP MOVEMENT =====================================
 
 // ...Actual movement
-define v_afterburner L_SHIFT // 3.5 L_Shift
-define v_boost L_SHIFT //DX30// No longer exists in 3.5 but set same as afterburner
-define v_brake 'x'       //3.5 x 3.0 Z (DX31)  
-define v_match_target_velocity ''   // 3.0 -- May need to change this to set combat speed??
-define v_strafe_left  'a'    // 3.5 Pedals bound to DX axis control, used for joystick
-define v_strafe_right 'd'    // 3.5   "         "           "
-define v_strafe_up    SPC    // 3.5 
-define v_strafe_down  L_CTL  // 3.5 
-define v_toggle_yaw_roll_swap L_ALT+'.'  // 3.5 ??
-define v_roll_left    'q'  // 3.5 
-define v_roll_right   'e'  // 3.5 
-define v_cruise_control	'c' // 3.5
-define v_strafe_fwd 'w'  // 3.5 OK;
-define v_strafe_back 's' // 3.5 OK;
+
 //define v_yaw_left        // 2.6 Unmapped
 //define v_yaw_right       // 2.6 Unmapped
 
 // ...ifcs
-define v_ifcs_toggle_gforce_safety R_CTL+'k'   // 3.5
 define v_ifcs_toggle_safeties '' //'v'        // 3.0 OK:  LMFD
-define v_ifcs_toggle_esp L_ALT+'v'             // 3.5 
-define v_ifcs_toggle_vector_decoupling 'v'     // 3.5
 
 // ...Landing/Qdrive Management
-define v_toggle_landing_system 'n'     // 3.0
-define v_autoland 'n' // 3.5 Long-Press
-define v_toggle_qdrive_engagement 'b'   // 3.5 Long-press to engage
-define v_toggle_qdrive_system 'b'       // 3.5
+
 
 // ========================== TARGET MANAGEMENT ============================================
 
@@ -76,7 +102,7 @@ define v_target_cycle_subsystem_reset '2'   // 3.5 long press
 define v_target_cycle_subsystem_fwd '2' //3.5   
 define v_target_cycle_subsystem_back L_ALT+'2' // 3.5; AndyC
 define v_target_toggle_pinned_focused '1'     // 3.5 long press 
-//define v_toggle_relative_mouse_mode R_CTL+'x' // 2.4 OK XXX 3.0 ???
+
 define v_toggle_weapon_gimbal_mode 'r' //3.5 
 define v_toggle_weapon_gimbal_lock 'r'  // 3.5 
 define v_couple_aim_to_move L_ALT+'r' //L_ALT+'m'    // 3.0 OK - "Look Ahead"
@@ -115,19 +141,13 @@ define v_weapon_cycle_countermeasure_fwd 'h'  // 3.5
 
 
 // =====================  View Management =====================================================
-define v_view_cycle_fwd F4         // 3.5 OK
-define v_view_look_behind 'z' //3.5 long press //DX21 3.0 --; Solarfly
+
+ //DX21 3.0 --; Solarfly
 define v_view_toggle_headlook_mode L_ALT+'r' //3.5 Look ahead?
 //define v_view_toggle_headlook_mode DX24 // 2.4 OK: XML rebinding takes voodoo.  multiTap="0"; XXX 3.0 obsolete?
 define v_view_cycle_headlook_mode '' //DX24 // 
-define v_view_freelook_mode 'z' //3.5
-define v_view_zoom_out DX13 // Might use this for the throttle limiter?
-define v_view_zoom_in DX11    // Might use this for the throttle limiter?
-define v_view_pitch_down DXHATDOWN     // For 3.0, we use the joystick itself under View mode to look around
-define v_view_pitch_up DXHATUP         // 
-define v_view_yaw_right DXHATRIGHT     // 
-define v_view_yaw_left DXHATLEFT       // 
-define v_view_mode 'z' //DX24 3.0 z; Solarfly
+
+
 define v_target_head_tracking R_CTL+'l'  // Custom   XXX 3.0 ???
 
 // Radar Management

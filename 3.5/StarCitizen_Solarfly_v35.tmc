@@ -235,7 +235,7 @@ int main()
     MapKey(&Throttle, EOLMOTOR, 0);
     MapKeyR(&Throttle, EOLMOTOR, 0);
 
-    MapKey(&Throttle, EOLIGN,  TEMPO(PULSE+v_view_cycle_fwd, PULSE+v_view_mode,300));
+    MapKey(&Throttle, EOLIGN,  TEMPO(PULSE+v_view_cycle_fwd, PULSE+v_view_freelook_mode,300));
 	MapKey(&Throttle, EOLNORM, 0);
 
     MapKey(&Throttle, EORNORM, 0);
