@@ -179,8 +179,8 @@ int main()
     
     // Countermeasures Cycling / PIP Mode / Gimbals / Look Ahead modes
 
-
-    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_lock, PULSE+v_couple_aim_to_move, 300));
+	// MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_lock, PULSE+v_couple_aim_to_move, 300));
+    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_weapon_cycle_aimmode, PULSE+v_couple_aim_to_move, 300));
 
     // -- Engine Power Off (Pull back on throttle)
     printf("   * * * NOTE! If throttle Idle pulled back to detent, use ENGLOVER to override and fix throttle position\x0a");
