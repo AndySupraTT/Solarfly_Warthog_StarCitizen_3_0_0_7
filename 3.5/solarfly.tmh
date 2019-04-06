@@ -154,15 +154,15 @@ int sc_set_ap_mode_engage(int t) {
     // In ALT, we toggle the landing gear. Long-press auto-lands.
     
     if (t == AP_RELEASE) {
-//     ActKey(KEYON+UP+scan_active_ping);
+     ActKey(KEYON+UP+v_invoke_ping);
         ActKey(KEYON+UP+v_autoland);
         return 0;
     }
     if (Throttle[APPAT]) {
         if (t == AP_SHORT)
-            ActKey(KEYON+PULSE+scan_toggle_mode);
- //       if (t == AP_LONG)
- //           ActKey(KEYON+DOWN+scan_active_ping);  // Released above
+            ActKey(KEYON+PULSE+v_toggle_scan_mode);
+        if (t == AP_LONG)
+            ActKey(KEYON+DOWN+v_invoke_ping);  // Released above
     } else if (Throttle[APAH]) {
         if (t == AP_LONG)
             ActKey(KEYON+PULSE+v_match_target_velocity);

@@ -114,12 +114,11 @@ int main()
                                  PULSE+v_target_cycle_friendly_back, 300));  // Long: cycle Friendly Back
 
     // H3 - Subsystem, Pinned Target and HUD select management
-//    MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
+    MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
     MapKey(&Joystick, H3L, TEMPO(PULSE+v_target_cycle_pinned_fwd, PULSE+v_target_cycle_pinned_back, 300)); // S: Cycle pinned back 
-    MapKey(&Joystick, H3U, TEMPO(PULSE+v_target_cycle_subsystem_fwd,
-							     PULSE+v_target_cycle_subsystem_back, 300)); // short: Cycle Target subsys forward
-    MapKey(&Joystick, H3D, TEMPO(PULSE+v_target_cycle_subsystem_reset,
-    							 PULSE+v_target_cycle_subsystem_reset, 300)); // S: Remove Target subsys. 
+    MapKey(&Joystick, H3U, TEMPO(PULSE+v_target_cycle_subsystem_fwd, 
+    					(CHAIN( DOWN+v_target_cycle_subsystem_reset, D(2000), UP+v_target_cycle_subsystem_reset)),300)); // S: Cycle Target subsys fwd. L: Subsys reset.
+    MapKey(&Joystick, H3D, PULSE+v_target_cycle_subsystem_back); // S: Cycle Target subsys back. 
 	
 	// ** H4 SHIELD / POWER MANAGEMENT / HUD CONTROL**
 	// PSM, H4 controls shields Fwd, Back, Left, Right; MSU/D on throttle controls top/bot
@@ -194,7 +193,8 @@ int main()
     printf("   * * * NOTE! If EACON was flipped on at startup, HUD mode may be reversed. Use F3 key to toggle it.\x0a");
     printf("   * * * NOTE! IF PSB was flipped on at startup, center it to PSM.\x0a");
     // CIG bug work around: Zoom out first before going into Inner Thought mode
-    MapKey(&Throttle, EACON, CHAIN(PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100),DOWN+pc_interaction_mode)); // Welcome to the new HUD Entry switch.
+    MapKey(&Throttle, EACON, CHAIN(PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, 
+    								D(100), PULSE+v_view_zoom_out, D(100),DOWN+pc_interaction_mode)); // Welcome to the new HUD Entry switch.
     MapKey(&Throttle, EACOFF, UP+pc_interaction_mode);
 	MapKey(&Throttle, PSB, PULSE+v_view_freelook_mode);
 	MapKeyR(&Throttle, PSB, PULSE+v_view_freelook_mode);
@@ -219,7 +219,8 @@ int main()
 
 
     // -- EJECT EJECT EJECT --------------------------------------------------
-    MapKey(&Throttle, APUON, TEMPO(0, PULSE+v_eject, EJECT_DELAY));  // EJECT 2 sec delay
+   // MapKey(&Throttle, APUON, TEMPO(0, PULSE+v_eject, EJECT_DELAY));  // EJECT 2 sec delay
+    MapKey(&Throttle, APUON, TEMPO(0,(CHAIN( DOWN+v_eject, D(2000), UP+v_eject)), EJECT_DELAY));
 	MapKey(&Throttle, APUOFF, PULSE+'x');  // Reset (x)
 
     // -- Throttle Axis & Dynamic Sensitivity Curves -------------------------
@@ -251,7 +252,6 @@ int main()
 	MapKey(&Throttle, APAH, 0);  // Flight Modes
 
 	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_esp, 300)); // S: Gforce Safety, L: ESP
-//	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_comstab, 300)); // S: Gforce Safety, L: Comstab
     MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_weapon_cycle_aimmode, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
 
 // ===============  NAVIGATION, QDRIVE, RADAR MANAGEMENT ========================================================
@@ -261,8 +261,7 @@ int main()
     MapKey(&Throttle, APENG, TEMPO(EXEC("sc_set_ap_mode_engage(AP_SHORT);"), EXEC("sc_set_ap_mode_engage(AP_LONG);"), 300));
     MapKeyR(&Throttle, APENG, EXEC("sc_set_ap_mode_engage(AP_RELEASE);"));
     MapKey(&Throttle, APDIS, 0);
-    MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_engagement, (CHAIN( DOWN+v_toggle_qdrive_system, D(1000), UP+v_toggle_qdrive_system)), 300)); // S: qdrive, L: engage
-    //MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_engagement, PULSE+v_toggle_qdrive_system, 300)); // S: qdrive, L: engage
+    MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_system, (CHAIN( DOWN+v_toggle_qdrive_engagement, D(1000), UP+v_toggle_qdrive_engagement)), 300)); // S: qdrive, L: engage
 }
 
 
