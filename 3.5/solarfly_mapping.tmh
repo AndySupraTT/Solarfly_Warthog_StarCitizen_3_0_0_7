@@ -50,8 +50,8 @@ define v_strafe_left  					'a'    		// 3.5 Pedals bound to DX axis control, used
 define v_strafe_right 					'd'    		// 3.5   "         "           "
 define v_strafe_fwd 					'w' 	 	// 3.5
 define v_strafe_back 					's' 		// 3.5
-define v_ifcs_throttle_invert			L_ALT+'/'	// 3.5 New
-define v_ifcs_toggle_speed_limiter		L_ALT+'-'	// 3.5 New
+define v_ifcs_throttle_invert			L_ALT+'/'	// 3.5
+define v_ifcs_toggle_speed_limiter		L_ALT+'-'	// 3.5
 define v_ifcs_toggle_gforce_safety 		L_ALT+'i'   // 3.5
 define v_ifcs_toggle_esp 				L_ALT+'o' 	// 3.5
 define v_cruise_control					'c'	 		// 3.5
@@ -143,21 +143,24 @@ define v_starmap 				F2   	// 3.5 StarMap
 
 define v_lights 				't'  	// 3.5 
 
-// ===========================  SPACESHIP GENERAL =====================================
-             
+// ========================== General =================================================
 
-define v_respawn BSP  // 3.5
+define pc_interaction_mode		'f'		// 3.5
+define v_respawn 				BSP  	// 3.5
+define pc_select 				DX5 	// 3.5 Same as weapon group 2
+
+// ========================= Social - General =========================================
+
+define toggle_contact 			F11   	// 3.5 but there's a comms menu now
+define toggle_chat 				F12   	//3.5
+
 //define v_yaw_left        // 2.6 Unmapped
 //define v_yaw_right       // 2.6 Unmapped
-define v_ifcs_toggle_safeties '' //'v'        // 3.0 OK:  LMFD
-define v_toggle_weapon_gimbal_mode 'r' //3.5 
-define v_view_toggle_headlook_mode L_ALT+'r' //3.5 Look ahead?
+//define v_ifcs_toggle_safeties '' //'v'        // 3.0 OK:  LMFD
+//define v_toggle_weapon_gimbal_mode 'r' //3.5 
+//define v_view_toggle_headlook_mode L_ALT+'r' //3.5 Look ahead?
 //define v_view_toggle_headlook_mode DX24 // 2.4 OK: XML rebinding takes voodoo.  multiTap="0"; XXX 3.0 obsolete?
-define v_view_cycle_headlook_mode '' //DX24 // 
+//define v_view_cycle_headlook_mode '' //DX24 // 
 //define v_radar_cycle_focus_fwd 'j' // 3.0 Obsolete
-define pc_interaction_mode DX22  // 3.5 'f'
-define pc_select DX5 // Same as weapon group 2
-// pc_zoom_in and pc_zoom_out same as other zooms
-define toggle_contact F11   // 3.5 but there's a comms menu now
-define toggle_chat F12   //3.5 This should get a mapping now since it's super useful
+
 

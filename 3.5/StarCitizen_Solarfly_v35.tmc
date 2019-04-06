@@ -90,7 +90,7 @@ int main()
     MapKey(&Joystick, S1, PULSE+v_weapon_cycle_countermeasure_fwd);   // Fire Missile / fire group 3
     MapKey(&Joystick, S2, DX2);   // Lock/Fire Missile / fire group 3
     MapKey(&Joystick, S3, PULSE+v_weapon_launch_countermeasure);   // Fire Countermeasures 3.0, 2.4 bug which required keyboard
-    MapKey(&Joystick, S4, DX4);   // Fire Group 4
+    //MapKey(&Joystick, S4, DX4);   // Fire Group 4
     
     // -- H1 VIEW MANAGEMENT ----------------------------------------------------------
     // CIG 3.0 Design Flaw - Wondering if Look Around will ever be available again during flight
@@ -132,7 +132,6 @@ int main()
 // I = EACARM
 // O = EACOFF
 // U/M/D = PSF PSM PSF
-// XXX CIG BUG - POWER DISTRIBUTION IS BROKEN
 	MapKeyIOUMD(&Joystick, H4U, 0, CHAIN(PULSE+power_ctl[1], PULSE+power_ctl[3]), v_shield_forward, v_shield_forward, 0, 0);  // Neg G3 (cool!) / Shield Fwd/ HUD Up
 	MapKeyIOUMD(&Joystick, H4R, 0, PULSE+power_ctl[1], 0, v_shield_right, 0, 0);  // Power G3 / Shield Right / HUD Right
 	MapKeyIOUMD(&Joystick, H4D, 0, PULSE+power_ctl[2], 0, v_shield_back, 0, 0);  // Power G2 / Shield Down / HUD Down
@@ -149,7 +148,9 @@ int main()
     // If RUDDER is 1, roll and strafe lateral will be assigned to the rudders and pedals.
     // If RUDDER is 0:
     //    - Roll will be assigned to CSL/CSR.
-    //    - Strafe L/R will be mapped to SCX Axis   
+    //    - Strafe L/R will be mapped to SCX Axis
+ 	MapKey(&Joystick, S4, v_ifcs_throttle_invert); // Puts throttle in reverse so long as pulled
+ 	MapKey(&Throttle, EOLMOTOR, v_ifcs_toggle_speed_limiter); // Restricts combat speed
     MapKey(&Throttle, CSU, v_strafe_up);    // Combat Strafe Vertical Up
     MapKey(&Throttle, CSD, v_strafe_down);  // Combat Strafe Vertical Up  
     if (!RUDDERS) {
@@ -232,8 +233,8 @@ int main()
     
     // View Modes
     MapKey(&Throttle, SC, v_view_look_behind); // Look Behind    
-    MapKey(&Throttle, EOLMOTOR, 0);
-    MapKeyR(&Throttle, EOLMOTOR, 0);
+    //MapKey(&Throttle, EOLMOTOR, 0);
+    //MapKeyR(&Throttle, EOLMOTOR, 0);
 
     MapKey(&Throttle, EOLIGN,  TEMPO(PULSE+v_view_cycle_fwd, PULSE+v_view_freelook_mode,300));
 	MapKey(&Throttle, EOLNORM, 0);
@@ -251,7 +252,7 @@ int main()
 
 	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_esp, 300)); // S: Gforce Safety, L: ESP
 //	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_comstab, 300)); // S: Gforce Safety, L: Comstab
-    MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_toggle_weapon_gimbal_mode, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
+    MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_weapon_cycle_aimmode, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
 
 // ===============  NAVIGATION, QDRIVE, RADAR MANAGEMENT ========================================================
 	MapKey(&Throttle, APPAT, 0);
