@@ -200,7 +200,7 @@ int main()
 	MapKeyR(&Throttle, PSB, PULSE+v_view_freelook_mode);
 
 	// -- Push to Talk & Comms -----------------------------------------------
-    MapKey(&Throttle, MSP, MIC_PTT);   // Match teamspeak or whatever key to the pilot_settings
+    MapKey(&Throttle, MSP, foip_pushtotalk);   // Match teamspeak or whatever key to the pilot_settings
 
     // -- Brake / Afterburners / Flight Control ------------------------------
     printf("   * * * NOTE! If you want SPDF Afterburner to work as a toggle instead of a switch, set EFLNORM\x0a");

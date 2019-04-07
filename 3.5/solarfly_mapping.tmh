@@ -150,9 +150,10 @@ define v_respawn 				BSP  	// 3.5
 define pc_select 				DX5 	// 3.5 Same as weapon group 2
 
 // ========================= Social - General =========================================
-
+define ADD						USB[0x57]		// Needed as Defines is not editable
+define foip_pushtotalk			ADD		// 3.5 Voip
 define toggle_contact 			F11   	// 3.5 but there's a comms menu now
-define toggle_chat 				F12   	//3.5
+define toggle_chat 				F12   	// 3.5
 
 //define v_yaw_left        // 2.6 Unmapped
 //define v_yaw_right       // 2.6 Unmapped
