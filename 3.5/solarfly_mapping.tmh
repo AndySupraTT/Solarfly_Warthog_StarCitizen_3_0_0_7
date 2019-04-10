@@ -1,0 +1,166 @@
+// Copyright (c) 2015-2018 Derek Douville ("solarfly")
+// Modified by AndyC. 
+//
+// Version 3.5
+// Mar 24, 2019 17:21 GMT
+//
+// Distributed freely under the MIT License.
+
+
+// Keybindings to match StarCitizen XML Mappings. DO NOT EDIT.
+//
+// =========================== Flight - Cockpit =======================================
+
+define v_eject 					'y' 		// 3.5 -- Hold
+define v_exit_seat 				'y'			// 3.5
+define v_self_destruct 			BSP 		// 3.5 
+define v_cooler_throttle_up 	L_ALT+'0'	// 3.5
+define v_cooler_throttle_down 	L_ALT+'7'	// 3.5
+define v_flightready 			'r' 		// 3.5
+define v_doors_open_all 		L_ALT+'8' 	// 3.5 
+define v_doors_close_all 		L_ALT+'8'	// 3.5 
+define v_doors_lock_all 		L_ALT+'r' 	// 3.5 
+define v_doors_unlock_all 		L_ALT+'r'	// 3.5 
+
+// =========================== Flight - View ==========================================
+
+define v_view_pitch_down 		DXHATDOWN	// For 3.5, we use the joystick itself under View mode to look around
+define v_view_pitch_up 			DXHATUP     // 
+define v_view_yaw_right 		DXHATRIGHT  // 
+define v_view_yaw_left 			DXHATLEFT   // 
+define v_view_cycle_fwd 		F4			// 3.5 
+define v_view_freelook_mode 	'z' 		// 3.5
+define v_view_zoom_out 			DX13 		// 3.5
+define v_view_zoom_in 			DX11    	// 3.5
+define v_view_look_behind 		'z' 		// 3.5 -- Long-Press
+
+// =========================== Flight - Movement ======================================
+define v_toggle_relative_mouse_mode 	R_CTL+'x' 	// 3.5
+define v_roll_left    					'q'  		// 3.5 
+define v_roll_right   					'e' 		// 3.5
+define v_toggle_yaw_roll_swap 			L_ALT+'.'  	// 3.5
+define v_match_target_velocity 			L_ALT+'t'   // 3.5
+define v_brake 							'x'       	// 3.5
+define v_speed_range-up					L_ALT+'y'	// 3.5 New
+define v_ifcs_toggle_vector_decoupling	'v'     	// 3.5
+define v_strafe_up    					SPC	    	// 3.5 
+define v_strafe_down  					L_CTL  		// 3.5
+define v_strafe_left  					'a'    		// 3.5 Pedals bound to DX axis control, used for joystick
+define v_strafe_right 					'd'    		// 3.5   "         "           "
+define v_strafe_fwd 					'w' 	 	// 3.5
+define v_strafe_back 					's' 		// 3.5
+define v_ifcs_throttle_invert			L_ALT+'/'	// 3.5
+define v_ifcs_toggle_speed_limiter		L_ALT+'-'	// 3.5
+define v_ifcs_toggle_gforce_safety 		L_ALT+'i'   // 3.5
+define v_ifcs_toggle_esp 				L_ALT+'o' 	// 3.5
+define v_cruise_control					'c'	 		// 3.5
+define v_afterburner 					L_SHIFT 	// 3.5
+define v_boost 							L_SHIFT 	// Needs removing from scripts
+define v_toggle_landing_system 			'n'     	// 3.5
+define v_autoland 						'n' 		// 3.5 -- Long-Press
+define v_toggle_qdrive_system 			'b'      	// 3.5
+define v_toggle_qdrive_engagement 		'b'   		// 3.5 -- Long-press
+
+// =========================== Flight - Targeting / Turrets ===========================
+
+define v_couple_aim_to_move 			L_ALT+'r' 	// 3.5 "Look Ahead"
+define v_mouse_aim_mode					R_SHIFT		// 3.5
+// define v_toggle_weapon_gimbal_lock 		'r'  		// 3.5
+define v_target_reticle_focus 			'1' 		// 3.5
+define v_target_cycle_all_fwd 			''     	 	// Not defined in SC
+define v_target_cycle_all_back 			''     		// Not defined in SC
+define v_target_cycle_friendly_fwd 		'5' 		// 3.5
+define v_target_cycle_friendly_back 	L_ALT+'5' 	// 3.5
+define v_target_toggle_pinned_focused 	'1'     	// 3.5 -- Long-Press
+define v_target_cycle_pinned_fwd 		'4' 		// 3.5
+define v_target_cycle_pinned_back 		L_ALT+'4'  	// 3.5
+define v_target_cycle_hostile_fwd 		'3'         // 3.5
+define v_target_cycle_hostile_back 		L_ALT+'3'  	// 3.5
+define v_target_nearest_hostile 		L_ALT +'1' 	// 3.5 
+define v_target_cycle_subsystem_fwd 	'2' 		// 3.5   
+define v_target_cycle_subsystem_back 	L_ALT+'2' 	// 3.5
+define v_target_cycle_subsystem_reset 	'2'   		// 3.5 -- Long-Press
+define v_target_cycle_reticle_mode 		L_ALT+'f' 	// 3.5
+define v_target_head_tracking 			R_CTL+'g'  	// 3.5
+define v_toggle_mining_mode				'm' 		// 3.5
+define v_toggle_scan_mode 				TAB   		// 3.5
+define v_invoke_ping					L_ALT+'h'	// 3.5
+define v_inc_ping_focus_angle			L_ALT+'j'	// 3.5
+define v_dec_ping_focus_angle			L_ALT+'k'	// 3.5
+
+// =========================== Flight - Mining ========================================
+
+define v_toggle_mining_laser_fire		L_ALT+'l'	// 3.5
+define v_toggle_mining_laser_type		L_ALT+'z'	// 3.5
+define v_increase_mining_throttle		''			// uses the mouse wheel
+define v_decrease_mining_throttle		''			// uses the mouse wheel
+
+// =========================== Flight - Weapons =======================================
+
+define v_weapon_cycle_aimmode			'r'			// 3.5
+define v_turret_gyromode				'g'			// 3,5
+
+// =========================== Flight - Defensive =====================================
+
+define v_weapon_launch_countermeasure 		'g' 	// 3.5
+define v_weapon_cycle_countermeasure_fwd 	'h'  	// 3.5
+define v_shield_forward 					KP8 	// 3.5 
+define v_shield_back    					KP2 	// 3.5
+define v_shield_left    					KP4 	// 3.5
+define v_shield_right   					KP6 	// 3.5
+define v_shield_up      					KP9 	// 3.5
+define v_shield_down    					KP7 	// 3.5
+define v_shield_reset   					KP5 	// 3.5
+
+// =========================== Flight - Power =========================================
+
+define v_power_focus_group_1  	F5		// 3.5 - Divert power to Weapons
+define v_power_focus_group_2  	F6  	// 3.5 - Divert power to Shields
+define v_power_focus_group_3 	F7  	// 3.5 - Divert power to Engines
+define v_power_reset_focus    	F8  	// 3.5 - Normalize Power
+define v_power_throttle_up 		F10 	// 3.5 - Increase overall power output
+define v_power_throttle_down	F9 		// 3.5 - Decrease overall power output
+define v_power_throttle_max		F10 	// 3.5 -- Double-Tap
+define v_power_throttle_min		F9 		// 3.5 -- Double-Tap
+define v_power_toggle_group_1 	'i' 	// 3.5 - Toggle power to Weapons 
+define v_power_toggle_group_2 	'o' 	// 3.5 - Toggle Power to shields 
+define v_power_toggle_group_3 	'p' 	// 3.5 - Toggle power to engines 
+define v_power_toggle			'u'		// 3.5 New
+
+// =========================== Flight - Radar =========================================
+
+define v_radar_toggle_active_or_passive 	R_CTL+',' // 3.5
+define v_radar_cycle_zoom_fwd 				L_ALT+',' // 3.5
+
+// =========================== Flight - HUD ===========================================
+
+define mobiglass_scoreboard 	F1  	// 3.5 Mobiglass
+define v_hud_open_scoreboard	TAB		// 3.5
+define v_starmap 				F2   	// 3.5 StarMap
+
+// =========================== Lights =================================================
+
+define v_lights 				't'  	// 3.5 
+
+// ========================== General =================================================
+
+define pc_interaction_mode		'f'		// 3.5
+define v_respawn 				BSP  	// 3.5
+define pc_select 				DX5 	// 3.5 Same as weapon group 2
+
+// ========================= Social - General =========================================
+define ADD						USB[0x57]		// Needed as Defines is not editable
+define foip_pushtotalk			ADD		// 3.5 Voip
+define toggle_contact 			F11   	// 3.5 but there's a comms menu now
+define toggle_chat 				F12   	// 3.5
+
+//define v_yaw_left        // 2.6 Unmapped
+//define v_yaw_right       // 2.6 Unmapped
+//define v_ifcs_toggle_safeties '' //'v'        // 3.0 OK:  LMFD
+//define v_toggle_weapon_gimbal_mode 'r' //3.5 
+//define v_view_toggle_headlook_mode L_ALT+'r' //3.5 Look ahead?
+//define v_view_toggle_headlook_mode DX24 // 2.4 OK: XML rebinding takes voodoo.  multiTap="0"; XXX 3.0 obsolete?
+//define v_view_cycle_headlook_mode '' //DX24 // 
+//define v_radar_cycle_focus_fwd 'j' // 3.0 Obsolete
+
+

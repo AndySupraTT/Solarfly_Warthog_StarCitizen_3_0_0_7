@@ -1,7 +1,8 @@
 // Copyright (c) 2015-2018 Derek Douville ("solarfly")
+// Modified (slightly) by AndyC. All rights still belong to Solarfly
 //
-// Version 3.0_6
-// Jan 1, 2018 11:50AM PST
+// Version 3.5
+// Mar 24, 2019 17:21 GMT
 //
 // Distributed freely under the MIT License.
 
@@ -53,12 +54,12 @@ int main()
     MapAxis(&Joystick, 0, MOUSE_X_AXIS, AXIS_NORMAL, MAP_RELATIVE);
     MapAxis(&Joystick, 0, MOUSE_Y_AXIS, AXIS_NORMAL, MAP_RELATIVE);
     MapAxis(&Joystick, 0, MOUSE_Z_AXIS, AXIS_NORMAL, MAP_RELATIVE);
+//    MapAxis(&Throttle, THR_FC, MOUSE_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 
-    SetSCurve(&Throttle, THR_FC, 0, 0, 0, SLIDER_FINE_CTL_CURVE, SLIDER_FINE_CTL_LIMIT);
+ //   SetSCurve(&Throttle, THR_FC, 0, 0, 0, SLIDER_FINE_CTL_CURVE, SLIDER_FINE_CTL_LIMIT);
     sc_set_joystick_curves();  // Init using custom curves in pilot_settings.tmh
     sc_set_throttle_norm();  // &Throttle, THR_RIGHT
 
-    //MapAxis(&Throttle, SCX, MOUSE_X_AXIS, AXIS_NORMAL, MAP_RELATIVE);
 	//SetSCurve(&Throttle, SCX, 0, 50, 0, -8, -10);
     MapAxis(&Throttle, SCX, 0, AXIS_NORMAL, MAP_RELATIVE);
 	MapAxis(&Throttle, SCY, 0, AXIS_NORMAL, MAP_ABSOLUTE);
@@ -89,7 +90,7 @@ int main()
     MapKey(&Joystick, S1, PULSE+v_weapon_cycle_countermeasure_fwd);   // Fire Missile / fire group 3
     MapKey(&Joystick, S2, DX2);   // Lock/Fire Missile / fire group 3
     MapKey(&Joystick, S3, PULSE+v_weapon_launch_countermeasure);   // Fire Countermeasures 3.0, 2.4 bug which required keyboard
-    MapKey(&Joystick, S4, DX4);   // Fire Group 4
+    //MapKey(&Joystick, S4, DX4);   // Fire Group 4
     
     // -- H1 VIEW MANAGEMENT ----------------------------------------------------------
     // CIG 3.0 Design Flaw - Wondering if Look Around will ever be available again during flight
@@ -98,8 +99,8 @@ int main()
     MapKey(&Joystick, H1L, v_view_yaw_left);
     MapKey(&Joystick, H1R, v_view_yaw_right);
     
-    MapKey(&Joystick, H3U, v_view_zoom_in); // Zoom In/Dynamic Zoom In/Inner Thought Zoom
-	MapKey(&Joystick, H3D, v_view_zoom_out); // Zoom Out 
+    //MapKey(&Joystick, H3U, v_view_zoom_in); // Zoom In/Dynamic Zoom In/Inner Thought Zoom
+	//MapKey(&Joystick, H3D, v_view_zoom_out); // Zoom Out 
 
     // -- TARGET MANAGEMENT --------------------------------------------------
     // H2
@@ -115,6 +116,9 @@ int main()
     // H3 - Subsystem, Pinned Target and HUD select management
     MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
     MapKey(&Joystick, H3L, TEMPO(PULSE+v_target_cycle_pinned_fwd, PULSE+v_target_cycle_pinned_back, 300)); // S: Cycle pinned back 
+    MapKey(&Joystick, H3U, TEMPO(PULSE+v_target_cycle_subsystem_fwd, 
+    					(CHAIN( DOWN+v_target_cycle_subsystem_reset, D(2000), UP+v_target_cycle_subsystem_reset)),300)); // S: Cycle Target subsys fwd. L: Subsys reset.
+    MapKey(&Joystick, H3D, PULSE+v_target_cycle_subsystem_back); // S: Cycle Target subsys back. 
 	
 	// ** H4 SHIELD / POWER MANAGEMENT / HUD CONTROL**
 	// PSM, H4 controls shields Fwd, Back, Left, Right; MSU/D on throttle controls top/bot
@@ -127,16 +131,10 @@ int main()
 // I = EACARM
 // O = EACOFF
 // U/M/D = PSF PSM PSF
-// XXX CIG BUG - POWER DISTRIBUTION IS BROKEN
-//	MapKeyIOUMD(&Joystick, H4U, 0, CHAIN(PULSE+power_ctl[1], PULSE+power_ctl[3]), v_shield_forward, v_shield_forward, 0, 0);  // Neg G3 (cool!) / Shield Fwd/ HUD Up
-//	MapKeyIOUMD(&Joystick, H4R, 0, PULSE+power_ctl[1], 0, v_shield_right, 0, 0);  // Power G3 / Shield Right / HUD Right
-//	MapKeyIOUMD(&Joystick, H4D, 0, PULSE+power_ctl[2], 0, v_shield_back, 0, 0);  // Power G2 / Shield Down / HUD Down
-//	MapKeyIOUMD(&Joystick, H4L, 0, PULSE+power_ctl[3], 0, v_shield_left, 0, 0);  // Power G1 / Shield Left / HUD Left
-
-    MapKey(&Joystick, H4U, v_shield_forward);
-    MapKey(&Joystick, H4D, v_shield_back);
-    MapKey(&Joystick, H4L, v_shield_left);
-    MapKey(&Joystick, H4R, v_shield_right);
+	MapKeyIOUMD(&Joystick, H4U, 0, CHAIN(PULSE+power_ctl[1], PULSE+power_ctl[3]), v_shield_forward, v_shield_forward, 0, 0);  // Neg G3 (cool!) / Shield Fwd/ HUD Up
+	MapKeyIOUMD(&Joystick, H4R, 0, PULSE+power_ctl[1], 0, v_shield_right, 0, 0);  // Power G3 / Shield Right / HUD Right
+	MapKeyIOUMD(&Joystick, H4D, 0, PULSE+power_ctl[2], 0, v_shield_back, 0, 0);  // Power G2 / Shield Down / HUD Down
+	MapKeyIOUMD(&Joystick, H4L, 0, PULSE+power_ctl[3], 0, v_shield_left, 0, 0);  // Power G1 / Shield Left / HUD Left
 
     // =======================================================================================
     // ---------------------------------------------------------------------------------------
@@ -149,7 +147,9 @@ int main()
     // If RUDDER is 1, roll and strafe lateral will be assigned to the rudders and pedals.
     // If RUDDER is 0:
     //    - Roll will be assigned to CSL/CSR.
-    //    - Strafe L/R will be mapped to SCX Axis   
+    //    - Strafe L/R will be mapped to SCX Axis
+ 	MapKey(&Joystick, S4, v_ifcs_throttle_invert); // Puts throttle in reverse so long as pulled
+ 	MapKey(&Throttle, EOLMOTOR, v_ifcs_toggle_speed_limiter); // Restricts combat speed
     MapKey(&Throttle, CSU, v_strafe_up);    // Combat Strafe Vertical Up
     MapKey(&Throttle, CSD, v_strafe_down);  // Combat Strafe Vertical Up  
     if (!RUDDERS) {
@@ -179,8 +179,8 @@ int main()
     
     // Countermeasures Cycling / PIP Mode / Gimbals / Look Ahead modes
 
-
-    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_lock, PULSE+v_couple_aim_to_move, 300));
+	// MapKey(&Throttle, LDGH, TEMPO(PULSE+v_toggle_weapon_gimbal_lock, PULSE+v_couple_aim_to_move, 300));
+    MapKey(&Throttle, LDGH, TEMPO(PULSE+v_weapon_cycle_aimmode, PULSE+v_couple_aim_to_move, 300));
 
     // -- Engine Power Off (Pull back on throttle)
     printf("   * * * NOTE! If throttle Idle pulled back to detent, use ENGLOVER to override and fix throttle position\x0a");
@@ -193,20 +193,23 @@ int main()
     printf("   * * * NOTE! If EACON was flipped on at startup, HUD mode may be reversed. Use F3 key to toggle it.\x0a");
     printf("   * * * NOTE! IF PSB was flipped on at startup, center it to PSM.\x0a");
     // CIG bug work around: Zoom out first before going into Inner Thought mode
-    MapKey(&Throttle, EACON, CHAIN(PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100),DOWN+pc_interaction_mode)); // Welcome to the new HUD Entry switch.
+    MapKey(&Throttle, EACON, CHAIN(PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, D(100), PULSE+v_view_zoom_out, 
+    								D(100), PULSE+v_view_zoom_out, D(100),DOWN+pc_interaction_mode)); // Welcome to the new HUD Entry switch.
     MapKey(&Throttle, EACOFF, UP+pc_interaction_mode);
-	MapKey(&Throttle, PSB, DOWN+v_view_freelook_mode);
-	MapKeyR(&Throttle, PSB, UP+v_view_freelook_mode);
+	MapKey(&Throttle, PSB, PULSE+v_view_freelook_mode);
+	MapKeyR(&Throttle, PSB, PULSE+v_view_freelook_mode);
 
 	// -- Push to Talk & Comms -----------------------------------------------
-    MapKey(&Throttle, MSP, MIC_PTT);   // Match teamspeak or whatever key to the pilot_settings
+    MapKey(&Throttle, MSP, foip_pushtotalk);   // Match teamspeak or whatever key to the pilot_settings
 
     // -- Brake / Afterburners / Flight Control ------------------------------
     printf("   * * * NOTE! If you want SPDF Afterburner to work as a toggle instead of a switch, set EFLNORM\x0a");
     MapKey(&Throttle, SPDF, EXEC("sc_brake_burn();"));
 	MapKeyR(&Throttle, SPDF, EXEC("sc_brake_burnR();"));
-	MapKey(&Throttle, SPDB, EXEC("sc_boost_burn();"));  // This is some seriously awesome voodoo magic, thank you
-	MapKeyR(&Throttle, SPDB, EXEC("sc_boost_burnR();"));
+	MapKey(&Throttle, SPDB, v_afterburner); //3.5
+	MapKeyR(&Throttle, SPDB, v_boost); //3.5
+	//MapKey(&Throttle, SPDB, EXEC("sc_boost_burn();"));  // This is some seriously awesome voodoo magic, thank you
+	//MapKeyR(&Throttle, SPDB, EXEC("sc_boost_burnR();"));
 	MapKey(&Throttle, BSB, EXEC("sc_set_decoupling();"));  // Decouple
 	MapKeyR(&Throttle, BSB, EXEC("sc_set_decoupling();")); // Coupled  (BSM on)
     printf("   * * * NOTE: If COUPLED/DECOUPLED is backwards (BSF, BSM, BSB), use c to toggle it.\x0a");
@@ -216,7 +219,8 @@ int main()
 
 
     // -- EJECT EJECT EJECT --------------------------------------------------
-    MapKey(&Throttle, APUON, TEMPO(0, PULSE+v_eject, EJECT_DELAY));  // EJECT 2 sec delay
+   // MapKey(&Throttle, APUON, TEMPO(0, PULSE+v_eject, EJECT_DELAY));  // EJECT 2 sec delay
+    MapKey(&Throttle, APUON, TEMPO(0,(CHAIN( DOWN+v_eject, D(2000), UP+v_eject)), EJECT_DELAY));
 	MapKey(&Throttle, APUOFF, PULSE+'x');  // Reset (x)
 
     // -- Throttle Axis & Dynamic Sensitivity Curves -------------------------
@@ -230,10 +234,10 @@ int main()
     
     // View Modes
     MapKey(&Throttle, SC, v_view_look_behind); // Look Behind    
-    MapKey(&Throttle, EOLMOTOR, 0);
-    MapKeyR(&Throttle, EOLMOTOR, 0);
+    //MapKey(&Throttle, EOLMOTOR, 0);
+    //MapKeyR(&Throttle, EOLMOTOR, 0);
 
-    MapKey(&Throttle, EOLIGN,  TEMPO(PULSE+v_view_cycle_fwd, PULSE+v_view_mode,300));
+    MapKey(&Throttle, EOLIGN,  TEMPO(PULSE+v_view_cycle_fwd, PULSE+v_view_freelook_mode,300));
 	MapKey(&Throttle, EOLNORM, 0);
 
     MapKey(&Throttle, EORNORM, 0);
@@ -247,8 +251,8 @@ int main()
 	printf("   * * * NOTE: If Trigger fires Group 2 and you wanted Group 1, flip RDR ALTM switch to NRM.\x0a");
 	MapKey(&Throttle, APAH, 0);  // Flight Modes
 
-	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_comstab, 300)); // S: Gforce Safety, L: Comstab
-    MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_ifcs_toggle_esp, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
+	MapKey(&Throttle, CHB, TEMPO(PULSE+v_ifcs_toggle_gforce_safety, PULSE+v_ifcs_toggle_esp, 300)); // S: Gforce Safety, L: ESP
+    MapKey(&Throttle, CHF, TEMPO(PULSE+v_target_cycle_reticle_mode, PULSE+v_weapon_cycle_aimmode, 300)); // XXX MOVE THIS TO CHINA HAT FORWARD
 
 // ===============  NAVIGATION, QDRIVE, RADAR MANAGEMENT ========================================================
 	MapKey(&Throttle, APPAT, 0);
@@ -257,7 +261,7 @@ int main()
     MapKey(&Throttle, APENG, TEMPO(EXEC("sc_set_ap_mode_engage(AP_SHORT);"), EXEC("sc_set_ap_mode_engage(AP_LONG);"), 300));
     MapKeyR(&Throttle, APENG, EXEC("sc_set_ap_mode_engage(AP_RELEASE);"));
     MapKey(&Throttle, APDIS, 0);
-    MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_engagement, PULSE+v_toggle_qdrive_system, 300)); // S: qdrive, L: engage
+    MapKey(&Throttle, LTB, TEMPO(PULSE+v_toggle_qdrive_system, (CHAIN( DOWN+v_toggle_qdrive_engagement, D(1000), UP+v_toggle_qdrive_engagement)), 300)); // S: qdrive, L: engage
 }
 
 

@@ -1,7 +1,7 @@
 // Copyright (c) 2015-2017 Derek Douville ("solarfly")
 //
-// Version 3.0_6
-// Jan 1, 2018 11:50AM PST
+// Version 3.5
+// Mar 24, 2019 17:21 GMT
 //
 // Distributed freely under the MIT License.
 
@@ -10,7 +10,7 @@ include "solarfly_mapping.tmh"
 
 // Magic
 
-int power_ctl[4] = {PULSE+'0', '2', '3', '1'};
+int power_ctl[4] = {PULSE+F8, F6, F5, F7};
 int qdrive_activated = 0;
 
 
@@ -54,6 +54,8 @@ int sc_init_burn_toggle()
 // If EFLNORM is set (normal), this turns on "AB toggle mode", where
 // the SPFB will turn it on on the first click, off on subsequent click.
 // If EFLOVER, it will act as a spring-loaded on/off as expected.
+// No longer needed in 3.5
+/*
 int sc_boost_burn()
 {
     // If THR_RIGHT is 99% or greater and Boost, we hit the burners
@@ -72,7 +74,7 @@ int sc_boost_burn()
         ActKey(KEYON+DOWN+v_boost);
     }
 }
-
+*/
 int sc_boost_burnR() {
     ActKey(KEYON+UP+v_boost);
     if (Throttle[EFLNORM] & abon) {
@@ -80,6 +82,7 @@ int sc_boost_burnR() {
     }
     ActKey(KEYON+UP+v_afterburner);
 }
+
 
 // CIG BUG 3.0-PTU Boost is ALWAYS applied with brakes, so this code is moot if/until fixed. No harm in leaving it for now.
 // https://ptu.cloudimperiumgames.com/community/issue-council/star-citizen-30/SC-49601-Spacebrake_always_applies_Boost__even_after_key_remapping__All_Ships_
@@ -151,15 +154,15 @@ int sc_set_ap_mode_engage(int t) {
     // In ALT, we toggle the landing gear. Long-press auto-lands.
     
     if (t == AP_RELEASE) {
-        ActKey(KEYON+UP+scan_active_ping);
+     ActKey(KEYON+UP+v_invoke_ping);
         ActKey(KEYON+UP+v_autoland);
         return 0;
     }
     if (Throttle[APPAT]) {
         if (t == AP_SHORT)
-            ActKey(KEYON+PULSE+scan_toggle_mode);
+            ActKey(KEYON+PULSE+v_toggle_scan_mode);
         if (t == AP_LONG)
-            ActKey(KEYON+DOWN+scan_active_ping);  // Released above
+            ActKey(KEYON+DOWN+v_invoke_ping);  // Released above
     } else if (Throttle[APAH]) {
         if (t == AP_LONG)
             ActKey(KEYON+PULSE+v_match_target_velocity);
