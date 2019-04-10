@@ -1,5 +1,5 @@
-<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="Warthog3_Rud2_35">
- <CustomisationUIHeader label="Warthog3_Rud2_35" description="" image="">
+<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="Thrustmaster3_Rud2_v35">
+ <CustomisationUIHeader label="Thrustmaster3_Rud2_v35" description="" image="">
   <devices>
    <keyboard instance="1"/>
    <mouse instance="1"/>
@@ -120,6 +120,12 @@
   <action name="v_toggle_landing_system">
    <rebind input="js1_ "/>
   </action>
+  <action name="v_toggle_relative_mouse_mode">
+   <rebind input="kb1_rctrl+x"/>
+  </action>
+  <action name="v_toggle_yaw_roll_swap">
+   <rebind input="kb1_lalt+period"/>
+  </action>
   <action name="v_yaw">
    <rebind input="js2_rotz"/>
   </action>
@@ -151,11 +157,11 @@
  </actionmap>
  <actionmap name="spaceship_mining">
   <action name="v_decrease_mining_throttle">
-   <rebind input="mo1_lalt+mwheel_down"/>
+   <rebind input="kb1_lalt+mwheel_down"/>
    <rebind input="js1_ "/>
   </action>
   <action name="v_increase_mining_throttle">
-   <rebind input="mo1_lalt+mwheel_up"/>
+   <rebind input="kb1_lalt+mwheel_up"/>
    <rebind input="js1_ "/>
   </action>
   <action name="v_toggle_mining_laser_fire">

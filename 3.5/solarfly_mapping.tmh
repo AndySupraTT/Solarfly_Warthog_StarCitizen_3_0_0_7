@@ -35,11 +35,10 @@ define v_view_zoom_in 			DX11    	// 3.5
 define v_view_look_behind 		'z' 		// 3.5 -- Long-Press
 
 // =========================== Flight - Movement ======================================
-
-define v_toggle_relative_mouse_mode 	R_CTL+'x' 	// Not defined in SC
+define v_toggle_relative_mouse_mode 	R_CTL+'x' 	// 3.5
 define v_roll_left    					'q'  		// 3.5 
 define v_roll_right   					'e' 		// 3.5
-define v_toggle_yaw_roll_swap 			L_ALT+'.'  	// Not defined in SC
+define v_toggle_yaw_roll_swap 			L_ALT+'.'  	// 3.5
 define v_match_target_velocity 			L_ALT+'t'   // 3.5
 define v_brake 							'x'       	// 3.5
 define v_speed_range-up					L_ALT+'y'	// 3.5 New
