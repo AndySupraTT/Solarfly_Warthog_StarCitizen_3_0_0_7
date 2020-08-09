@@ -61,8 +61,10 @@ int main()
     sc_set_throttle_norm();  // &Throttle, THR_RIGHT
 
 	//SetSCurve(&Throttle, SCX, 0, 50, 0, -8, -10);
-    MapAxis(&Throttle, SCX, 0, AXIS_NORMAL, MAP_RELATIVE);
-	MapAxis(&Throttle, SCY, 0, AXIS_NORMAL, MAP_ABSOLUTE);
+    MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
+    //MapAxis(&Throttle, SCX, 0, AXIS_NORMAL, MAP_RELATIVE);
+    //MapAxis(&Throttle, SCY, 0, AXIS_NORMAL, MAP_ABSOLUTE);
 	//SetSCurve(&Throttle, SCY, 0, 0, 0, 0, 0);
 
     // =======================================================================================
@@ -104,21 +106,21 @@ int main()
 
     // -- TARGET MANAGEMENT --------------------------------------------------
     // H2
-    MapKey(&Joystick, H2U, TEMPO(PULSE+v_target_nearest_hostile,   // short: target
-        PULSE+v_target_toggle_pinned_focused, 300));               // long:  pin the target
-	MapKey(&Joystick, H2D, TEMPO(PULSE+v_target_reticle_focus,     // short: target
-	   PULSE+v_target_toggle_pinned_focused, 300));                // long: pin the target
+    MapKey(&Joystick, H2U, TEMPO(PULSE+v_target_nearest_hostile,   // short: target nearest hostile
+        PULSE+v_target_nearest_attacker, 300));               // long:  pin the target nearest attacker
+	MapKey(&Joystick, H2D, TEMPO(PULSE+v_target_reticle_focus,     // short: target ahead
+	   PULSE+v_unlock_target, 300));                // long: unlock the target
     MapKey(&Joystick, H2R, TEMPO(PULSE+v_target_cycle_hostile_fwd,          // Short: Cycle Hostile fwd
-                                 PULSE+v_target_cycle_hostile_back, 300));   // Long: Cycle hostile Back
+                                 PULSE+v_target_cycle_attacker_fwd, 300));   // Long: Cycle Attacker fwd
     MapKey(&Joystick, H2L, TEMPO(PULSE+v_target_cycle_friendly_fwd,         // Short: Cycle Friendly Fwd
-                                 PULSE+v_target_cycle_friendly_back, 300));  // Long: cycle Friendly Back
+                                 PULSE+v_target_nearest_friendly, 300));  // Long: Target nearest Friendly Back
 
     // H3 - Subsystem, Pinned Target and HUD select management
-    MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_cycle_all_back, 300)); // short: Cycle Target All Fwd
-    MapKey(&Joystick, H3L, TEMPO(PULSE+v_target_cycle_pinned_fwd, PULSE+v_target_cycle_pinned_back, 300)); // S: Cycle pinned back 
+    MapKey(&Joystick, H3R, TEMPO(PULSE+v_target_cycle_all_fwd, PULSE+v_target_nearest_all, 300)); // short: Cycle Target All Fwd Long: Targer nearest
+//    MapKey(&Joystick, H3L, TEMPO(PULSE+v_target_cycle_pinned_fwd, PULSE+v_target_cycle_pinned_back, 300)); // S: Cycle pinned back Not in 3.10
     MapKey(&Joystick, H3U, TEMPO(PULSE+v_target_cycle_subsystem_fwd, 
-    					(CHAIN( DOWN+v_target_cycle_subsystem_reset, D(2000), UP+v_target_cycle_subsystem_reset)),300)); // S: Cycle Target subsys fwd. L: Subsys reset.
-    MapKey(&Joystick, H3D, PULSE+v_target_cycle_subsystem_back); // S: Cycle Target subsys back. 
+    					(CHAIN( DOWN+v_target_nearest_subsystem, D(2000), UP+v_target_nearest_subsystem)),300)); // S: Cycle Target subsys fwd. L: Nearest Subsys
+//    MapKey(&Joystick, H3D, PULSE+v_target_cycle_subsystem_back); // S: Cycle Target subsys back. Not in 3.10
 	
 	// ** H4 SHIELD / POWER MANAGEMENT / HUD CONTROL**
 	// PSM, H4 controls shields Fwd, Back, Left, Right; MSU/D on throttle controls top/bot
@@ -208,6 +210,7 @@ int main()
 	MapKeyR(&Throttle, SPDF, EXEC("sc_brake_burnR();"));
 	MapKey(&Throttle, SPDB, v_afterburner); //3.5
 	MapKeyR(&Throttle, SPDB, v_boost); //3.5
+	MapKey(&Throttle, SC, v_boost); // Boost for strafe
 	//MapKey(&Throttle, SPDB, EXEC("sc_boost_burn();"));  // This is some seriously awesome voodoo magic, thank you
 	//MapKeyR(&Throttle, SPDB, EXEC("sc_boost_burnR();"));
 	MapKey(&Throttle, BSB, EXEC("sc_set_decoupling();"));  // Decouple
@@ -233,7 +236,7 @@ int main()
     MapKeyR(&Throttle, FLAPD, EXEC("sc_set_joystick_curves();"));
     
     // View Modes
-    MapKey(&Throttle, SC, v_view_look_behind); // Look Behind    
+    //MapKey(&Throttle, SC, v_view_look_behind); // Look Behind    
     //MapKey(&Throttle, EOLMOTOR, 0);
     //MapKeyR(&Throttle, EOLMOTOR, 0);
 

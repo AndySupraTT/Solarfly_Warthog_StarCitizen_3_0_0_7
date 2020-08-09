@@ -128,9 +128,9 @@ int sc_set_tg1_h4p()
     // If RDRALT
     int secondary_fire = 0;
     if (Throttle[RDRNRM]) {  // Normal
-        MapKey(&Joystick, TG1, DX1);  // fire group 1
-        MapKey(&Joystick, TG2, DX5);
-        secondary_fire = DX5;        	    
+        MapKey(&Joystick, TG1, REXEC(0,100,"ActKey(KEYON+PULSE+DX1);"));  // fire group 1
+        MapKey(&Joystick, TG2, REXEC(1,100,"ActKey(KEYON+PULSE+DX5);"));
+        secondary_fire = PULSE+DX5;        	    
 	    printf("RDRNRM: Weapon Group 1 on TG1, Weapon Group 2 on H4P\x0a");
 	} else {
         MapKey(&Joystick, TG1, DX5);  // fire group 1

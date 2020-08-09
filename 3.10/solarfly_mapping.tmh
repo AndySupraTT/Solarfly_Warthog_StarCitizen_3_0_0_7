@@ -39,9 +39,9 @@ define v_toggle_relative_mouse_mode 	R_CTL+'x' 	// 3.5
 define v_roll_left    					'q'  		// 3.5 
 define v_roll_right   					'e' 		// 3.5
 define v_toggle_yaw_roll_swap 			L_ALT+'.'  	// 3.5
-define v_match_target_velocity 			L_ALT+'t'   // 3.5
-define v_brake 							'x'       	// 3.5
-define v_speed_range-up					L_ALT+'y'	// 3.5 New
+define v_match_target_velocity 		L_ALT+'t'   // 3.5
+define v_brake 						'x'       	// 3.5
+define v_speed_range-up				L_ALT+'y'	// 3.5 New
 define v_ifcs_toggle_vector_decoupling	'v'     	// 3.5
 define v_strafe_up    					SPC	    	// 3.5 
 define v_strafe_down  					L_CTL  		// 3.5
@@ -66,21 +66,28 @@ define v_toggle_qdrive_engagement 		'b'   		// 3.5 -- Long-press
 define v_couple_aim_to_move 			L_ALT+'r' 	// 3.5 "Look Ahead"
 define v_mouse_aim_mode					R_SHIFT		// 3.5
 // define v_toggle_weapon_gimbal_lock 		'r'  		// 3.5
-define v_target_reticle_focus 			'1' 		// 3.5
-define v_target_cycle_all_fwd 			''     	 	// Not defined in SC
-define v_target_cycle_all_back 			''     		// Not defined in SC
-define v_target_cycle_friendly_fwd 		'5' 		// 3.5
-define v_target_cycle_friendly_back 	L_ALT+'5' 	// 3.5
-define v_target_toggle_pinned_focused 	'1'     	// 3.5 -- Long-Press
-define v_target_cycle_pinned_fwd 		'4' 		// 3.5
-define v_target_cycle_pinned_back 		L_ALT+'4'  	// 3.5
-define v_target_cycle_hostile_fwd 		'3'         // 3.5
-define v_target_cycle_hostile_back 		L_ALT+'3'  	// 3.5
-define v_target_nearest_hostile 		L_ALT +'1' 	// 3.5 
-define v_target_cycle_subsystem_fwd 	'2' 		// 3.5   
-define v_target_cycle_subsystem_back 	L_ALT+'2' 	// 3.5
-define v_target_cycle_subsystem_reset 	'2'   		// 3.5 -- Long-Press
-define v_target_cycle_reticle_mode 		L_ALT+'f' 	// 3.5
+define v_target_reticle_focus 			't' 		// 3.10
+define v_unlock_target       			L_ALT+'t' 	// 3.10
+define v_target_cycle_all_fwd 			'7'     	// 3.10
+define v_target_cycle_all_back 		''          // Not defined in SC
+define v_target_nearest_all     		L_ALT+'7'   // 3.10
+define v_target_cycle_friendly_fwd 	'6' 		// 3.10
+define v_target_cycle_friendly_back 	'' 	    // Not defined in 3.10
+define v_target_nearest_friendly        L_ALT+'6' 	// 3.10
+define v_target_toggle_pinned_focused 	'1'     	// 3.10
+define v_target_cycle_pinned_fwd 		'' 		// Removed in 3.10?
+define v_target_cycle_pinned_back 		''  	    // Remover in 3.10?
+define v_target_cycle_hostile_fwd 		'5'         // 3.5
+define v_target_cycle_hostile_back 	''          // Not defined in 3.10
+define v_target_nearest_hostile 		L_ALT +'5'  // 3.10
+define v_target_cycle_attacker_fwd 	'4'         // 3.5
+define v_target_cycle_attacker_back 	''          // Not defined in 3.10
+define v_target_nearest_attacker 		L_ALT +'4'  // 3.10
+define v_target_cycle_subsystem_fwd 	'8' 		// 3.10   
+define v_target_cycle_subsystem_back 	'' 	    // Not defined in 3.10
+define v_target_cycle_subsystem_reset 	''   		// Not defined in 3.10
+define v_target_nearest_subsystem       L_ALT+'8'   // 3.10
+define v_target_cycle_reticle_mode 	L_ALT+'f' 	// 3.5
 define v_target_head_tracking 			R_CTL+'g'  	// 3.5
 define v_toggle_mining_mode				'm' 		// 3.5
 define v_toggle_scan_mode 				TAB   		// 3.5
@@ -97,13 +104,13 @@ define v_decrease_mining_throttle		''			// uses the mouse wheel
 
 // =========================== Flight - Weapons =======================================
 
-define v_weapon_cycle_aimmode			'r'			// 3.5
+define v_weapon_cycle_aimmode			'g'			// 3.5
 define v_turret_gyromode				'g'			// 3,5
 
 // =========================== Flight - Defensive =====================================
 
-define v_weapon_launch_countermeasure 		'g' 	// 3.5
-define v_weapon_cycle_countermeasure_fwd 	'h'  	// 3.5
+define v_weapon_launch_countermeasure 		'h' 	// 3.10
+define v_weapon_cycle_countermeasure_fwd 	'j'  	// 3.5
 define v_shield_forward 					KP8 	// 3.5 
 define v_shield_back    					KP2 	// 3.5
 define v_shield_left    					KP4 	// 3.5
@@ -140,7 +147,7 @@ define v_starmap 				F2   	// 3.5 StarMap
 
 // =========================== Lights =================================================
 
-define v_lights 				't'  	// 3.5 
+define v_lights 				'l'  	// For ship lights 3.10
 
 // ========================== General =================================================
 

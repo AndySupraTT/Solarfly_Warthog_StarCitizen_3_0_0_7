@@ -1,0 +1,229 @@
+<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="GameGlass310">
+ <CustomisationUIHeader label="GameGlass310" description="GameGlass310" image="">
+  <devices>
+   <keyboard instance="1"/>
+  </devices>
+  <categories>
+   <category label="@ui_CCSpaceFlight"/>
+   <category label="@ui_CCVehicle"/>
+   <category label="@ui_CCFPS"/>
+   <category label="@ui_CCCamera"/>
+  </categories>
+ </CustomisationUIHeader>
+ <options type="keyboard" instance="1" Product="Keyboard {6F1D2B61-D5A0-11CF-BFC7-444553540000}"/>
+ <modifiers />
+ <actionmap name="spaceship_general">
+  <action name="v_cooler_throttle_down">
+   <rebind input="kb1_lalt+7"/>
+  </action>
+  <action name="v_cooler_throttle_up">
+   <rebind input="kb1_lalt+0"/>
+  </action>
+  <action name="v_toggle_all_doors">
+   <rebind input="kb1_k"/>
+  </action>
+  <action name="v_toggle_all_doorlocks">
+   <rebind input="kb1_l"/>
+  </action>
+  <action name="v_close_all_doors">
+   <rebind input="kb1_lalt+8"/>
+  </action>
+  <action name="v_open_all_doors">
+   <rebind input="kb1_lalt+k"/>
+  </action>
+  <action name="v_lock_all_doors">
+   <rebind input="kb1_lalt+l"/>
+  </action>
+  <action name="v_unlock_all_doors">
+   <rebind input="kb1_lalt+9"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_view">
+  <action name="v_view_look_behind">
+   <rebind input="kb1_lalt+7"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_movement">
+  <action name="v_ifcs_toggle_esp">
+   <rebind input="kb1_lalt+o"/>
+  </action>
+  <action name="v_ifcs_toggle_gforce_safety">
+   <rebind input="kb1_lalt+i"/>
+  </action>
+  <action name="v_ifcs_toggle_speed_limiter">
+   <rebind input="kb1_lalt+minus"/>
+  </action>
+  <action name="v_speed_range_up">
+   <rebind input="kb1_lalt+y"/>
+  </action>
+  <action name="v_target_match_vel">
+   <rebind input="kb1_lalt+t"/>
+  </action>
+  <action name="v_toggle_vtol">
+   <rebind input="kb1_k"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_targeting">
+  <action name="v_target_cycle_reticle_mode">
+   <rebind input="kb1_lalt+f"/>
+  </action>
+  <action name="v_target_head_tracking">
+   <rebind input="kb1_lalt+g"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_defensive">
+  <action name="v_shield_raise_level_down">
+   <rebind input="kb1_np_7"/>
+  </action>
+  <action name="v_shield_raise_level_up">
+   <rebind input="kb1_np_9"/>
+  </action>
+ </actionmap>
+ <actionmap name="vehicle_general">
+  <action name="v_toggle_all_doorlocks">
+   <rebind input="kb1_l"/>
+  </action>
+  <action name="v_toggle_all_doors">
+   <rebind input="kb1_k"/>
+  </action>
+  <action name="v_horn">
+   <rebind input="kb1_spacebar"/>
+  </action>
+ </actionmap>
+ <actionmap name="player_emotes">
+  <action name="emote_agree">
+   <rebind input="kb1_lalt+np_1" activationMode="double_tap"/>
+  </action>
+  <action name="emote_angry">
+   <rebind input="kb1_lalt+np_2" activationMode="double_tap"/>
+  </action>
+  <action name="emote_atease">
+   <rebind input="kb1_lalt+np_3" activationMode="double_tap"/>
+  </action>
+  <action name="emote_attention">
+   <rebind input="kb1_lalt+np_4" activationMode="double_tap"/>
+  </action>
+  <action name="emote_blah">
+   <rebind input="kb1_lalt+np_5" activationMode="double_tap"/>
+  </action>
+  <action name="emote_bored">
+   <rebind input="kb1_lalt+np_6" activationMode="double_tap"/>
+  </action>
+  <action name="emote_bow">
+   <rebind input="kb1_lalt+np_7" activationMode="double_tap"/>
+  </action>
+  <action name="emote_burp">
+   <rebind input="kb1_lalt+np_8" activationMode="double_tap"/>
+  </action>
+  <action name="emote_cheer">
+   <rebind input="kb1_lalt+np_9" activationMode="double_tap"/>
+  </action>
+  <action name="emote_chicken">
+   <rebind input="kb1_lalt+p" activationMode="double_tap"/>
+  </action>
+  <action name="emote_clap">
+   <rebind input="kb1_lalt+o" activationMode="double_tap"/>
+  </action>
+  <action name="emote_come">
+   <rebind input="kb1_lalt+i" activationMode="double_tap"/>
+  </action>
+  <action name="emote_cry">
+   <rebind input="kb1_lalt+u" activationMode="double_tap"/>
+  </action>
+  <action name="emote_dance">
+   <rebind input="kb1_lalt+y" activationMode="double_tap"/>
+  </action>
+  <action name="emote_disagree">
+   <rebind input="kb1_lalt+l" activationMode="double_tap"/>
+  </action>
+  <action name="emote_failure">
+   <rebind input="kb1_lalt+k" activationMode="double_tap"/>
+  </action>
+  <action name="emote_flex">
+   <rebind input="kb1_lalt+end" activationMode="double_tap"/>
+  </action>
+  <action name="emote_flirt">
+   <rebind input="kb1_lalt+h" activationMode="double_tap"/>
+  </action>
+  <action name="emote_gasp">
+   <rebind input="kb1_lalt+g" activationMode="double_tap"/>
+  </action>
+  <action name="emote_gloat">
+   <rebind input="kb1_lalt+m" activationMode="double_tap"/>
+  </action>
+  <action name="emote_greet">
+   <rebind input="kb1_lalt+n" activationMode="double_tap"/>
+  </action>
+  <action name="emote_laugh">
+   <rebind input="kb1_lalt+b" activationMode="double_tap"/>
+  </action>
+  <action name="emote_launch">
+   <rebind input="kb1_lalt+f5" activationMode="double_tap"/>
+  </action>
+  <action name="emote_point">
+   <rebind input="kb1_lalt+f6" activationMode="double_tap"/>
+  </action>
+  <action name="emote_rude">
+   <rebind input="kb1_lalt+f7" activationMode="double_tap"/>
+  </action>
+  <action name="emote_salute">
+   <rebind input="kb1_lalt+f10" activationMode="double_tap"/>
+  </action>
+  <action name="emote_sit">
+   <rebind input="kb1_lalt+f11" activationMode="double_tap"/>
+  </action>
+  <action name="emote_sleep">
+   <rebind input="kb1_lalt+pgup" activationMode="double_tap"/>
+  </action>
+  <action name="emote_smell">
+   <rebind input="kb1_lalt+minus" activationMode="double_tap"/>
+  </action>
+  <action name="emote_taunt">
+   <rebind input="kb1_lalt+backslash" activationMode="double_tap"/>
+  </action>
+  <action name="emote_threaten">
+   <rebind input="kb1_lalt+backspace" activationMode="double_tap"/>
+  </action>
+  <action name="emote_wait">
+   <rebind input="kb1_lalt+7" activationMode="double_tap"/>
+  </action>
+  <action name="emote_wave">
+   <rebind input="kb1_lalt+f9" activationMode="double_tap"/>
+  </action>
+  <action name="emote_whistle">
+   <rebind input="kb1_lalt+8" activationMode="double_tap"/>
+  </action>
+ </actionmap>
+ <actionmap name="view_director_mode">
+  <action name="view_fov_in">
+   <rebind input="kb1_np_add"/>
+  </action>
+  <action name="view_fov_out">
+   <rebind input="kb1_np_subtract"/>
+  </action>
+  <action name="view_fstop_in">
+   <rebind input="kb1_home"/>
+  </action>
+  <action name="view_fstop_out">
+   <rebind input="kb1_end"/>
+  </action>
+  <action name="view_move_target_X_neg">
+   <rebind input="kb1_left"/>
+  </action>
+  <action name="view_move_target_X_pos">
+   <rebind input="kb1_right"/>
+  </action>
+  <action name="view_move_target_Y_neg">
+   <rebind input="kb1_down"/>
+  </action>
+  <action name="view_move_target_Y_pos">
+   <rebind input="kb1_up"/>
+  </action>
+  <action name="view_move_target_Z_neg">
+   <rebind input="kb1_pgdn"/>
+  </action>
+  <action name="view_move_target_Z_pos">
+   <rebind input="kb1_pgup"/>
+  </action>
+ </actionmap>
+</ActionMaps>
